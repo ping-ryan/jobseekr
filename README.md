@@ -6,10 +6,10 @@ To build an application in order to show an understanding of working with third-
 
 ## Project Requirements
 
-**Pair programming**
+### Pair programming
 It is just as important to work well with your partner as it is to make a functional product. Both members of the team should have a complete understanding of the technical aspects of the project.
 
-**Code**
+### Code
 - App is dynamic based on user interaction (e.g. drop down menu, search field)
 - App and interactions are accessible
 - It is clear to the user what the app does and results are displayed legibly
@@ -27,7 +27,7 @@ It is just as important to work well with your partner as it is to make a functi
 - Site is responsive and uses media queries
 - ID selectors should not be used to style elements
 
-**Presentation**
+### Presentation
 You will be presenting your project on the day it's due:
 - Identified one technical win
 - Identified one technical challenge
