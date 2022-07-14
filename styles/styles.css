@@ -220,3 +220,44 @@ template {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+/* =========================
+ *  Font family
+ * ======================== */
+/* =========================
+*  Font colors
+* ======================== */
+html {
+  font-size: 125%;
+}
+
+.wrapper {
+  max-width: 1480px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li,
+a,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
