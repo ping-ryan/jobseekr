@@ -1,3 +1,74 @@
 // font-family: 'Montserrat',sans-serif;
 // font-family: 'Source Code Pro',monospace;
 
+/* =========================
+ *  Headers and paragraphs
+ * ======================== */
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $heading-font, monospace;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    color: $white;
+}
+
+
+h1 {
+    font-size: clamp(3.5rem, 9vw, 5rem);
+    line-height: 5.75;
+}
+
+h2 {
+    font-size: clamp(2.25rem, 3vw, 2.625rem);
+    line-height: 1;
+}
+
+h3 {
+    font-size: clamp(1.75rem, 3vw, 2rem);
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+body {
+    font-family: $body-font, sans-serif;
+    font-weight: normal;
+    // set base font to 18px on smaller screens and 20px on desktop for accessibility, assuming most default browsers have 16px default font size
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    text-align: center;
+    line-height: 2rem;
+    letter-spacing: 0px;
+    color: $white;
+}
+
+/* =========================
+ *  Links, inputs & buttons
+ * ======================== */
+
+a {
+    font-family: $body-font, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1rem;
+    text-align: right;
+    line-height: 1.8125;
+    letter-spacing: 0.0625rem;
+    color: $white;
+}
+
+button {
+    font-family: $heading-font, monospace;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    font-size: 1.25rem;
+    text-align: center;
+    line-height: 2rem;
+    color: $black;
+}
+
