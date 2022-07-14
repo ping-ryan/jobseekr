@@ -405,6 +405,9 @@ input {
   padding: 3rem;
   border: 2px solid #FF8552;
 }
+.resultsList li {
+  border: 2px solid #FF8552;
+}
 
 footer {
   background-color: #FF8552;

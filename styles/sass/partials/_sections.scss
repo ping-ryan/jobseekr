@@ -58,4 +58,7 @@ section {
     gap: 2rem;
     padding: 3rem;
     border: 2px solid $accent;
+    li {
+        border: 2px solid $accent;
+    }
 }
