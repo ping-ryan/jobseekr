@@ -1,0 +1,61 @@
+body {
+    background-color: $black;
+}
+
+section {
+    padding: 5rem 0;
+}
+
+/* =========================
+ *  Skip-link
+ * ======================== */
+
+// Skip link to skip to main content, hidden unless focused
+.skip-link {
+    position: absolute;
+    right: 50%;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+    font-family: $body-font, sans-serif;
+    background-color: $white;
+    color: $black;
+    height: 3rem;
+    padding: 0.5rem;
+}
+
+.skip-link:focus {
+    transform: translateY(0%);
+}
+
+/* =========================
+ * USER INPUT SECTION
+ * ======================== */
+
+ input {
+     border: none;
+     font-family: $body-font, sans-serif;
+     font-size: 1rem;
+     padding: 1rem;
+ }
+
+ .userParameters {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 2rem;
+     padding: 3rem;
+     border: 2px solid $accent;
+ }
+
+ /* =========================
+ * RESULTS SECTION
+ * ======================== */
+
+.resultsList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+    border: 2px solid $accent;
+}

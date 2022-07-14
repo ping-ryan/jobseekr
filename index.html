@@ -7,60 +7,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
     <script type='text/javascript' src='config.js'></script>
     <script defer src="script.js"></script>
     <title>jobseekr</title>
 </head>
 <body>
-<!-- Skip Link, for accessiblity purposes -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Skip Link, for accessiblity purposes -->
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
 
+    <!-- HEADER -->
     <header class="homeHeader">
         <div class="wrapper">
             <h1>
-                jobSeekr
+                JobSeekr
             </h1>
             <h2>
-                the dev job search made easy.
+                The dev job search made easy.
             </h2>
         </div>
         <div>
-            <img src="./assets/Lightning-Boltsvg.svg" alt="logo of a neat lightning bolt">
+            <img src="./assets/lightning-bolt.svg" alt="Logo of a neat lightning bolt">
         </div>
     </header>
 
+    <!-- MAIN -->
     <main id="mainContent">
+
+        <!-- USER PROMPT section -->
         <section class="userInput">
-            <div>
-                <form action="" class="userParameter">
-                    <h3>job search</h3>
+            <div class="wrapper">
+                <form action="" class="userParameters">
+                    <h3>Job Search</h3>
+
                     <label for="jobTitle" class="sr-only">Job Title</label>
                     <input type="text" id="jobTitle" placeholder="Job Title">
+
                     <label for="company" class="sr-only">Company</label>
                     <input type="text" id="company" placeholder="Company">
+
                     <label for="location" class="sr-only">Location</label>
                     <input type="text" id="location" placeholder="Location">
+
                     <button class="button" type="submit">Hire Me!</button>
                 </form>
             </div>
-
         </section>
+
+        <!-- RESULTS section -->
+        <section class="results">
+            <div class="wrapper resultsList">
+
+                <h3>Jobs For You:</h3>
+
+                <ul class="jobsList">
+                <!-- Results will be appended here -->
+                </ul>
+
+            </div>
+        </section>
+
     </main>
 
-    <section class="results">
-        <h3>Just For You!</h3>
-        <ul class="jobsList">
-
-        </ul>
-    </section>
-
+    <!-- FOOTER section -->
     <footer>
-        created by JUNO College 2022 Copyright©
+        Copyright © Created at <a href="https://junocollege.com/">Juno College </a>
     </footer>
 
-    
-
-    <script></script>
 </body>
 </html>
