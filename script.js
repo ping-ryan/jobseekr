@@ -33,11 +33,17 @@ jobApp.displayJobs = (jobs) => {
         jobLocation.textContent = job.location.display_name;
         const jobCompany = document.createElement('p');
         jobCompany.textContent = job.company.display_name;
+        const redirectUrl = document.createElement('p');
+        const redirectLink = document.createElement('a');
+        redirectLink.setAttribute("href",job.redirect_url);
+        redirectLink.textContent = 'Apply here';
+        redirectUrl.appendChild(redirectLink);
 
         // append the job text as a child of the list item
         listItem.appendChild(jobTitle);
         listItem.appendChild(jobLocation);
         listItem.appendChild(jobCompany);
+        listItem.appendChild(redirectUrl);
 
         document.getElementById('jobsList').appendChild(listItem);
     })

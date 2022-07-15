@@ -31,21 +31,58 @@ section {
  * USER INPUT SECTION
  * ======================== */
 
- input {
-     border: none;
-     font-family: $body-font, sans-serif;
-     font-size: 1rem;
-     padding: 1rem;
- }
+.searchCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
 
- .userParameters {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 2rem;
-     padding: 3rem;
-     border: 2px solid $accent;
- }
+.userInput {
+    min-height: 100vh;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    border: none;
+    border-radius: 30px;
+    font-family: $body-font, sans-serif;
+    font-size: 1rem;
+    padding: 1rem;
+    min-width: 16rem;
+    text-align: center;
+    background-color: $white;
+}
+
+.userParameters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3rem;
+    background: #FFFFFF;
+    border-radius: 30px;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%), 0 1px 1px 0 rgb(0 0 0 / 10%);
+}
+
+.submitButton {
+    padding: 0.5rem 1.5rem;
+    transition: 0.3s;
+    border: none;
+    background-color: $accent;
+    border-radius: 30px;
+    width: 100%;
+    &:hover{
+        background-color: $black;
+        color: $white;
+    }
+}
+
+.jobSearchHeader {
+    color: $black;
+}
 
  /* =========================
  * RESULTS SECTION
@@ -56,9 +93,35 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 3rem;
-    border: 2px solid $accent;
+    padding: 3rem 0;
+}
+
+.jobsList {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 100%;
     li {
         border: 2px solid $accent;
+        padding: 1rem 0 2.5rem 0;
+        border-radius: 30px;
+    }
+
+    a {
+        font-family: $heading-font, monospace;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+        font-size: 1.25rem;
+        text-align: center;
+        line-height: 2rem;
+        color: $black;
+        background-color: $accent;
+        padding: 0.5rem 2rem;
+        border-radius: 30px;
+        &:hover {
+            background-color: $white;
+            color: $black;
+        }
     }
 }

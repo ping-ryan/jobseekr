@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
+    <script src="https://kit.fontawesome.com/f21b5dfadd.js" crossorigin="anonymous"></script>
     <script type='text/javascript' src='config.js'></script>
     <script defer src="script.js"></script>
     <title>jobseekr</title>
@@ -24,11 +25,12 @@
                 JobSeekr
             </h1>
             <h2>
-                The dev job search made easy.
+                The job search made easy.
             </h2>
-        </div>
-        <div class="bolt">
-            <img src="./assets/lightning-bolt.svg" alt="Logo of a neat lightning bolt">
+            <div class="bolt">
+                <img src="./assets/lightning-bolt.svg" alt="Logo of a neat lightning bolt">
+            </div>
+            <a href="#mainContent"><i class="fa-solid fa-angles-down arrowDown grow"></i></a>
         </div>
     </header>
 
@@ -37,9 +39,10 @@
 
         <!-- USER PROMPT section -->
         <section class="userInput">
-            <div class="wrapper">
+            <div class="wrapper searchCard">
+                <h3 class="jobSearchHeader">Job Search</h3>
+
                 <form action="" class="userParameters">
-                    <h3>Job Search</h3>
 
                     <label for="jobTitle" class="sr-only">Job Title</label>
                     <input type="text" id="jobTitle" placeholder="Job Title">
@@ -50,7 +53,7 @@
                     <label for="location" class="sr-only">Location</label>
                     <input type="text" id="location" placeholder="Location">
 
-                    <button class="button" type="submit">Hire Me!</button>
+                    <button class="submitButton" type="submit">Get Me Hired</button>
                 </form>
             </div>
         </section>
@@ -63,6 +66,45 @@
 
                 <ul class="jobsList" id="jobsList">
                 <!-- Results will be appended here -->
+
+                <!-- test entries for CSS styling purposes -->
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+                    <li>
+                        <p>Senior Developer</p>
+                        <p>Toronto</p>
+                        <p>RBC</p>
+                        <a href="#">Apply Here</a>
+                    </li>
+
                 </ul>
 
             </div>
