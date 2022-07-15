@@ -1,11 +1,12 @@
-// base font: 20px (1rem)
 html {
+    // base font: 20px (1rem)
     font-size: 125%;
+    scroll-behavior: smooth;
 }
 
 .wrapper {
     max-width: 1480px;
-    width: 90%;
+    width: 80%;
     margin: 0 auto; 
 }
 

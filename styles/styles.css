@@ -265,7 +265,6 @@ body {
   font-size: clamp(0.9rem, 3vw, 1rem);
   text-align: center;
   line-height: 2rem;
-  letter-spacing: 0px;
   color: #f6f6f6;
 }
 
@@ -296,11 +295,12 @@ button {
 
 html {
   font-size: 125%;
+  scroll-behavior: smooth;
 }
 
 .wrapper {
   max-width: 1480px;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -329,7 +329,7 @@ h4 {
   padding: 0;
 }
 
-header .titleText {
+.titleText {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -340,14 +340,18 @@ header .titleText {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
 }
-header .titleText h1 {
+.titleText h1 {
   color: #FF8552;
   margin-bottom: -5rem;
   font-size: 3rem;
   margin-top: -4rem;
 }
-header .titleText h2 {
+.titleText h2 {
   color: #21D19F;
   font-size: 1.5rem;
   text-align: left;
@@ -359,6 +363,19 @@ header .titleText h2 {
   -webkit-transform: rotate(25deg);
           transform: rotate(25deg);
   margin-top: 0.5rem;
+  width: 10rem;
+}
+@media (min-width: 900px) {
+  .bolt {
+    width: 15rem;
+  }
+}
+
+.arrowDown {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: #f6f6f6;
+  position: absolute;
+  bottom: 5rem;
 }
 
 body {
@@ -396,11 +413,40 @@ section {
 /* =========================
  * USER INPUT SECTION
  * ======================== */
+.searchCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.userInput {
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 input {
   border: none;
+  border-radius: 30px;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   padding: 1rem;
+  min-width: 16rem;
+  text-align: center;
+  background-color: #f6f6f6;
 }
 
 .userParameters {
@@ -414,9 +460,30 @@ input {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 3rem;
-  border: 2px solid #FF8552;
+  background: #FFFFFF;
+  border-radius: 30px;
+  -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.submitButton {
+  padding: 0.5rem 1.5rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border: none;
+  background-color: #FF8552;
+  border-radius: 30px;
+  width: 100%;
+}
+.submitButton:hover {
+  background-color: #2D3047;
+  color: #f6f6f6;
+}
+
+.jobSearchHeader {
+  color: #2D3047;
 }
 
 /* =========================
@@ -434,23 +501,7 @@ input {
       -ms-flex-align: center;
           align-items: center;
   gap: 2rem;
-  padding: 3rem;
-  border: 2px solid #FF8552;
-}
-.resultsList li {
-  border: 2px solid #FF8552;
-}
-.resultsList a {
-  font-family: "Source Code Pro", monospace;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.0625rem;
-  font-size: 1.25rem;
-  text-align: center;
-  line-height: 2rem;
-  color: #2D3047;
-  background-color: #FF8552;
-  padding: 1rem 2rem;
+  padding: 3rem 0;
 }
 
 .jobsList {
@@ -462,15 +513,46 @@ input {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 4rem;
-  width: 90%;
+  width: 100%;
+}
+.jobsList li {
+  border: 2px solid #FF8552;
+  padding: 1rem 0 2.5rem 0;
+  border-radius: 30px;
+}
+.jobsList a {
+  font-family: "Source Code Pro", monospace;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  font-size: 1.25rem;
+  text-align: center;
+  line-height: 2rem;
+  color: #2D3047;
+  background-color: #FF8552;
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+}
+.jobsList a:hover {
+  background-color: #f6f6f6;
+  color: #2D3047;
 }
 
 footer {
-  background-color: #FF8552;
+  background-color: #f6f6f6;
   color: #2D3047;
 }
 footer a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  text-transform: capitalize;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  text-align: center;
+  line-height: 2rem;
   color: #2D3047;
+}
+footer a:hover {
+  color: #FF8552;
 }
 
 @-webkit-keyframes slidein {
@@ -498,6 +580,15 @@ footer a {
     opacity: 1;
   }
 }
+.grow {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+}
+
 /* =========================
 * RESULTS SECTION
 * ======================== */

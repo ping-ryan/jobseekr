@@ -1,7 +1,17 @@
 footer {
-    background-color: $accent;
+    background-color: $white;
     color: $black;
+
     a {
+        font-family: $body-font, sans-serif;
+        font-weight: normal;
+        text-transform: capitalize;
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        text-align: center;
+        line-height: 2rem;
         color: $black;
+        &:hover {
+            color: $accent;
+        }
     }
 }

@@ -1,7 +1,10 @@
-header .titleText {
-display: flex;
-flex-direction: column;
-align-items: center;
+.titleText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
     h1 {
         color: $accent;
         margin-bottom: -5rem;
@@ -20,6 +23,15 @@ align-items: center;
 .bolt {
     transform: rotate(25deg);
     margin-top: 0.5rem;
+    width: 10rem;
+    @media (min-width: 900px) {
+        width: 15rem;
+    }
 }
 
-
+.arrowDown {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: $white;
+    position: absolute;
+    bottom: 5rem;
+}
