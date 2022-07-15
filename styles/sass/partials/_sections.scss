@@ -60,6 +60,24 @@ section {
     border: 2px solid $accent;
     li {
         border: 2px solid $accent;
- 
     }
+    a {
+        font-family: $heading-font, monospace;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+        font-size: 1.25rem;
+        text-align: center;
+        line-height: 2rem;
+        color: $black;
+        background-color: $accent;
+        padding: 1rem 2rem;
+    }
+}
+
+.jobsList {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 90%;
 }

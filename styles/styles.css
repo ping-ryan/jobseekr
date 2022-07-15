@@ -343,28 +343,22 @@ header .titleText {
 }
 header .titleText h1 {
   color: #FF8552;
-  margin-bottom: -100px;
+  margin-bottom: -5rem;
   font-size: 3rem;
-  margin-top: -80px;
+  margin-top: -4rem;
 }
 header .titleText h2 {
   color: #21D19F;
   font-size: 1.5rem;
   text-align: left;
-  margin-left: 20px;
-  margin-top: -10px;
+  margin-left: 1rem;
+  margin-top: -0.5rem;
 }
 
 .bolt {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-transform: rotate(25deg);
           transform: rotate(25deg);
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
 body {
@@ -445,6 +439,30 @@ input {
 }
 .resultsList li {
   border: 2px solid #FF8552;
+}
+.resultsList a {
+  font-family: "Source Code Pro", monospace;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  font-size: 1.25rem;
+  text-align: center;
+  line-height: 2rem;
+  color: #2D3047;
+  background-color: #FF8552;
+  padding: 1rem 2rem;
+}
+
+.jobsList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4rem;
+  width: 90%;
 }
 
 footer {
