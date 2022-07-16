@@ -65,7 +65,7 @@ button {
     font-weight: normal;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
-    font-size: 1.25rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
     text-align: center;
     line-height: 2rem;
     color: $black;

@@ -287,7 +287,7 @@ button {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.0625rem;
-  font-size: 1.25rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
   text-align: center;
   line-height: 2rem;
   color: #2D3047;
@@ -382,10 +382,6 @@ body {
   background-color: #2D3047;
 }
 
-section {
-  padding: 5rem 0;
-}
-
 /* =========================
  *  Skip-link
  * ======================== */
@@ -424,7 +420,7 @@ section {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .userInput {
@@ -448,7 +444,7 @@ section {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
 }
 @media (min-width: 900px) {
   .userInput .wrapper {
@@ -467,9 +463,9 @@ input {
   border: none;
   border-radius: 30px;
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
   padding: 1rem;
-  min-width: 14rem;
+  min-width: 12rem;
   text-align: center;
   background-color: #f6f6f6;
 }
@@ -510,6 +506,16 @@ input {
 /* =========================
 * RESULTS SECTION
 * ======================== */
+.results {
+  min-height: 100vh;
+}
+
+@media (min-width: 900px) {
+  .resultsHeader {
+    padding: 2rem;
+  }
+}
+
 .resultsList {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -538,7 +544,7 @@ input {
 }
 .jobsList li {
   border: 2px solid #FF8552;
-  padding: 1rem 0 2.5rem 0;
+  padding: 1rem 1rem 1.5rem 1rem;
   border-radius: 30px;
 }
 .jobsList a {
