@@ -39,22 +39,26 @@
 
         <!-- USER PROMPT section -->
         <section class="userInput">
-            <div class="wrapper searchCard">
-                <h3 class="jobSearchHeader">Job Search</h3>
+            <div class="wrapper">
+                <div class="searchCard">
+                    <h3 class="jobSearchHeader">Job Search</h3>
+                    <form action="" class="userParameters" id="userForm">
 
-                <form action="" class="userParameters" id="userForm">
+                        <label for="jobTitle" class="sr-only">Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Job Title">
 
-                    <label for="jobTitle" class="sr-only">Job Title</label>
-                    <input type="text" id="jobTitle" placeholder="Job Title">
+                        <label for="company" class="sr-only">Company</label>
+                        <input type="text" id="company" placeholder="Company">
 
-                    <label for="company" class="sr-only">Company</label>
-                    <input type="text" id="company" placeholder="Company">
+                        <label for="location" class="sr-only">Location</label>
+                        <input type="text" id="location" placeholder="Location">
 
-                    <label for="location" class="sr-only">Location</label>
-                    <input type="text" id="location" placeholder="Location">
-
-                    <button class="submitButton" type="submit">Get Me Hired</button>
-                </form>
+                        <button class="submitButton" type="submit">Get Me Hired</button>
+                    </form>
+                </div>
+                <div class="searchImage">
+                    <img src="./assets/search.svg" alt="A woman searching through digital elements">
+                </div>
             </div>
         </section>
 

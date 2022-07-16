@@ -42,7 +42,20 @@ section {
     min-height: 100vh;
     background-color: $white;
     display: flex;
-    align-items: center;
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3rem;
+        @media (min-width: 900px) {
+            flex-direction: row;
+        }
+    }
+}
+
+.jobSearchHeader {
+    color: $black;
 }
 
 input {
@@ -51,7 +64,7 @@ input {
     font-family: $body-font, sans-serif;
     font-size: 1rem;
     padding: 1rem;
-    min-width: 16rem;
+    min-width: 14rem;
     text-align: center;
     background-color: $white;
 }
@@ -61,7 +74,7 @@ input {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding: 3rem;
+    padding: 1.5rem;
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%), 0 1px 1px 0 rgb(0 0 0 / 10%);
@@ -78,10 +91,6 @@ input {
         background-color: $black;
         color: $white;
     }
-}
-
-.jobSearchHeader {
-    color: $black;
 }
 
  /* =========================

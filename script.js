@@ -40,7 +40,7 @@ jobApp.getUserQuery = function(){
  * - If the API call fails, display an error message
  * ======================== */
 
-jobApp.getJobs = (jobTitle, company, location) => {
+jobApp.getJobs = function(jobTitle, company, location){
     fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id=' + id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
     .then(function (response) {
         return response.json();
@@ -58,7 +58,7 @@ jobApp.getJobs = (jobTitle, company, location) => {
  * - It finally displays each list item by appending to existing ul 
  * ======================== */
 
-jobApp.displayJobs = (jobs) => {
+jobApp.displayJobs = function(jobs) {
 
     // clear old results from the ul
     const jobsList = document.getElementById('jobsList');
