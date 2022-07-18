@@ -12,6 +12,7 @@ const jobApp = {};
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
    jobApp.getUserQuery();
+   
 }
 
 /* =========================
@@ -27,8 +28,9 @@ jobApp.getUserQuery = function(){
         const jobTitle = document.getElementById('jobTitle');
         const company = document.getElementById('company');
         const location = document.getElementById('location');
+        const numResults = document.getElementById('numResults');
         // pass on userParameters to getJobs function
-        jobApp.getJobs(jobTitle.value, company.value, location.value);        
+        jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value);        
     });
 };
 
@@ -40,13 +42,27 @@ jobApp.getUserQuery = function(){
  * - If the API call fails, display an error message
  * ======================== */
 
-jobApp.getJobs = function(jobTitle, company, location){
-    fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id=' + id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
-    .then(function (response) {
+jobApp.getJobs = function(jobTitle, company, location, numResults){
+    const url = new URL ('https://api.adzuna.com/v1/api/jobs/ca/search')
+    //fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id='; //+ id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
+
+    url.search = new URLSearchParams({
+        app_id: config.APP_ID,
+        app_key: config.API_KEY,
+        what: jobTitle,
+        where: location,
+        company: company,
+        results_per_page: numResults
+
+    })
+
+    fetch(url)
+    .then(function (response) {      
         return response.json();
     })
     .then(function (jsonData) {
         jobApp.displayJobs(jsonData.results);
+        console.log(jsonData.results);
     })
 };   
 
@@ -69,13 +85,19 @@ jobApp.displayJobs = function(jobs) {
         // create a list item that will contain all the job details for each job
         const listItem = document.createElement('li');
 
-        // create paragraph tags to hold all job details
+        // create paragraph tags to hold all job details        
         const jobTitle = document.createElement('p');
         jobTitle.textContent = job.title;
         const jobLocation = document.createElement('p');
         jobLocation.textContent = job.location.display_name;
         const jobCompany = document.createElement('p');
         jobCompany.textContent = job.company.display_name;
+        const description = document.createElement('p');
+        description.textContent = job.description;
+        const contractLength = document.createElement('p');        
+        contractLength.textContent = job.contract_time;
+        const dateCreated = document.createElement('p');
+        dateCreated.textContent = job.created;
 
         // create a link containing URL to apply for the job
         const redirectUrl = document.createElement('p');
@@ -85,14 +107,20 @@ jobApp.displayJobs = function(jobs) {
         redirectUrl.appendChild(redirectLink);
 
         // append the job details to each job list item
-        listItem.appendChild(jobTitle);
-        listItem.appendChild(jobLocation);
-        listItem.appendChild(jobCompany);
-        listItem.appendChild(redirectUrl);
+        listItem.append(jobTitle, dateCreated, jobLocation, jobCompany, contractLength, redirectUrl, description);
 
         // append each job details to the list
         jobsList.appendChild(listItem);
     })
 };
+
+
+
+// jobApp.formatString = function(altString){
+//     const finalString = altString.replace('_', ' ');
+//     return finalString;
+// }
+
+
 
 jobApp.init();
