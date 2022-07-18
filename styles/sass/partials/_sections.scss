@@ -141,3 +141,19 @@ input {
         }
     }
 }
+
+.sorting {
+    padding-bottom: 1.5rem;
+    @media (min-width: 900px) {
+        padding-bottom: 3.5rem;
+    }
+    select {
+    background-color: $white;
+    color: $black;
+    font-family: $body-font, sans-serif;
+    padding: 0.5rem;
+    }
+    p {
+        margin: 0;
+    }
+}

@@ -570,6 +570,24 @@ input {
   color: #2D3047;
 }
 
+.sorting {
+  padding-bottom: 1.5rem;
+}
+@media (min-width: 900px) {
+  .sorting {
+    padding-bottom: 3.5rem;
+  }
+}
+.sorting select {
+  background-color: #f6f6f6;
+  color: #2D3047;
+  font-family: "Montserrat", sans-serif;
+  padding: 0.5rem;
+}
+.sorting p {
+  margin: 0;
+}
+
 footer {
   background-color: #f6f6f6;
   color: #2D3047;
