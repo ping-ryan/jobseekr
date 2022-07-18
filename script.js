@@ -28,9 +28,15 @@ jobApp.getUserQuery = function(){
         const jobTitle = document.getElementById('jobTitle');
         const company = document.getElementById('company');
         const location = document.getElementById('location');
-        const numResults = document.getElementById('numResults');
-        // pass on userParameters to getJobs function
-        jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value);        
+
+        // get custom sorting attribute
+        document.getElementById('sortResults').addEventListener('change', function(e){
+            const userSortSelection = this.value;
+            jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value, userSortSelection);
+        })
+
+        // pass on userParameters to getJobs function, default sorting parameter is by relevance
+        jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
     });
 };
 
@@ -42,9 +48,8 @@ jobApp.getUserQuery = function(){
  * - If the API call fails, display an error message
  * ======================== */
 
-jobApp.getJobs = function(jobTitle, company, location, numResults){
+jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
     const url = new URL ('https://api.adzuna.com/v1/api/jobs/ca/search')
-    //fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id='; //+ id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
 
     url.search = new URLSearchParams({
         app_id: config.APP_ID,
@@ -52,8 +57,7 @@ jobApp.getJobs = function(jobTitle, company, location, numResults){
         what: jobTitle,
         where: location,
         company: company,
-        results_per_page: numResults
-
+        sort_by: sortByParameter
     })
 
     fetch(url)
@@ -87,18 +91,18 @@ jobApp.displayJobs = function(jobs) {
 
         // create paragraph tags to hold all job details        
         const jobTitle = document.createElement('p');
-        jobTitle.textContent = job.title;
+        jobTitle.textContent = "Title: " + job.title;
+        const contractLength = document.createElement('p');
+        contractLength.textContent = "Contract Type: " + job.contract_time;
         const jobLocation = document.createElement('p');
-        jobLocation.textContent = job.location.display_name;
+        jobLocation.textContent = "Location: " + job.location.display_name;
         const jobCompany = document.createElement('p');
-        jobCompany.textContent = job.company.display_name;
-        const description = document.createElement('p');
-        description.textContent = job.description;
-        const contractLength = document.createElement('p');        
-        contractLength.textContent = job.contract_time;
+        jobCompany.textContent = "Company: " + job.company.display_name;
         const dateCreated = document.createElement('p');
-        dateCreated.textContent = job.created;
-
+        dateCreated.textContent = "Date posted: " + job.created;
+        const description = document.createElement('p');
+        description.textContent = "Description: " + job.description;
+        
         // create a link containing URL to apply for the job
         const redirectUrl = document.createElement('p');
         const redirectLink = document.createElement('a');
@@ -107,7 +111,7 @@ jobApp.displayJobs = function(jobs) {
         redirectUrl.appendChild(redirectLink);
 
         // append the job details to each job list item
-        listItem.append(jobTitle, dateCreated, jobLocation, jobCompany, contractLength, redirectUrl, description);
+        listItem.append(jobTitle, contractLength, jobLocation, jobCompany, dateCreated, redirectUrl, description);
 
         // append each job details to the list
         jobsList.appendChild(listItem);
