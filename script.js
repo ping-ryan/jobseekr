@@ -1,4 +1,8 @@
-// Initialize API preset data in the dedicated properties:
+/* =========================
+ * Initialization steps
+ * ======================== */
+
+// Initialize API settings:
 const id = config.APP_ID;
 const key = config.API_KEY;
 
@@ -10,7 +14,12 @@ jobApp.init = function() {
    jobApp.getUserQuery();
 }
 
-// Create a method (getUserQuery) with parameters ‘jobTitle’, ‘company’ and ‘location’ based on user input
+/* =========================
+ * getUserQuery method
+ * - This method has an event listener on the submit button of the user form
+ * - When user parameters are inputted, it passes them to the getJobs() method
+ * ======================== */
+
 jobApp.getUserQuery = function(){
     const userForm = document.getElementById('userForm');
     userForm.addEventListener('submit', function(e){
@@ -18,48 +27,71 @@ jobApp.getUserQuery = function(){
         const jobTitle = document.getElementById('jobTitle');
         const company = document.getElementById('company');
         const location = document.getElementById('location');
-        // pass on userParameters to displayJobs function
+        // pass on userParameters to getJobs function
         jobApp.getJobs(jobTitle.value, company.value, location.value);        
     });
 };
 
-// Create a method (getJobs) which requests information from the API, based on what parameters the user set for jobTitle, company and location
-// Retrieve info on each job: jobTitle, company, location and redirect URL (to apply)
-// When the API call is successful, create an results list object to store all the jobs and return that object, it will be passed on as argument to displayJobs
-// If the API call fails, display an error message 
-jobApp.getJobs = (jobTitle, company, location) => {
+/* =========================
+ * getJobs method
+ * - This method requests info from the API based on user parameters passed to it by getUserQuery() method
+ * - It retrieves the following information on each job: jobTitle, company, location and redirect URL
+ * - If the API call is successful, execute displayJobs() and pass on json results data
+ * - If the API call fails, display an error message
+ * ======================== */
+
+jobApp.getJobs = function(jobTitle, company, location){
     fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id=' + id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (jsonData) {
-            jobApp.displayJobs(jsonData.results);
-        });
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (jsonData) {
+        jobApp.displayJobs(jsonData.results);
+    })
 };   
 
-// Create a method (displayJobs) which would display all the jobs returned by the getJobs() method (display the div results)
-// loop through the results object and display each job available on a new page (with jobTitle, company, location and redirect URL) with infinite scroll feature
-// if no jobs avail meeting criteria, display a message saying so
-jobApp.displayJobs = (jobs) => {
+/* =========================
+ * displayJobs method
+ * - This method displays all the jobs returned by the getJobs() in the jobsList ul by looping through each job result 
+ * - It first clears all the old results of previous searches (if applicable)
+ * - Then loops through each job result and creates a list item to contain each job result
+ * - It finally displays each list item by appending to existing ul 
+ * ======================== */
+
+jobApp.displayJobs = function(jobs) {
+
+    // clear old results from the ul
+    const jobsList = document.getElementById('jobsList');
+    jobsList.innerHTML = '';
+
+    // loop through each job result and create a list item to be appended to results ul
     jobs.forEach(job => {
+        // create a list item that will contain all the job details for each job
         const listItem = document.createElement('li');
+
+        // create paragraph tags to hold all job details
         const jobTitle = document.createElement('p');
         jobTitle.textContent = job.title;
         const jobLocation = document.createElement('p');
         jobLocation.textContent = job.location.display_name;
         const jobCompany = document.createElement('p');
         jobCompany.textContent = job.company.display_name;
+
+        // create a link containing URL to apply for the job
         const redirectUrl = document.createElement('p');
         const redirectLink = document.createElement('a');
         redirectLink.setAttribute("href",job.redirect_url);
         redirectLink.textContent = 'Apply here';
         redirectUrl.appendChild(redirectLink);
-        // append the job text as a child of the list item
+
+        // append the job details to each job list item
         listItem.appendChild(jobTitle);
         listItem.appendChild(jobLocation);
         listItem.appendChild(jobCompany);
         listItem.appendChild(redirectUrl);
-        document.getElementById('jobsList').appendChild(listItem);
+
+        // append each job details to the list
+        jobsList.appendChild(listItem);
     })
 };
 

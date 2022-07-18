@@ -287,7 +287,7 @@ button {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.0625rem;
-  font-size: 1.25rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
   text-align: center;
   line-height: 2rem;
   color: #2D3047;
@@ -382,10 +382,6 @@ body {
   background-color: #2D3047;
 }
 
-section {
-  padding: 5rem 0;
-}
-
 /* =========================
  *  Skip-link
  * ======================== */
@@ -424,7 +420,7 @@ section {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .userInput {
@@ -433,18 +429,43 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.userInput .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 900px) {
+  .userInput .wrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+.jobSearchHeader {
+  color: #2D3047;
 }
 
 input {
   border: none;
   border-radius: 30px;
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
   padding: 1rem;
-  min-width: 16rem;
+  min-width: 12rem;
   text-align: center;
   background-color: #f6f6f6;
 }
@@ -461,7 +482,7 @@ input {
       -ms-flex-align: center;
           align-items: center;
   gap: 1.5rem;
-  padding: 3rem;
+  padding: 1.5rem;
   background: #FFFFFF;
   border-radius: 30px;
   -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -482,13 +503,19 @@ input {
   color: #f6f6f6;
 }
 
-.jobSearchHeader {
-  color: #2D3047;
-}
-
 /* =========================
 * RESULTS SECTION
 * ======================== */
+.results {
+  min-height: 100vh;
+}
+
+@media (min-width: 900px) {
+  .resultsHeader {
+    padding: 2rem;
+  }
+}
+
 .resultsList {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -517,7 +544,7 @@ input {
 }
 .jobsList li {
   border: 2px solid #FF8552;
-  padding: 1rem 0 2.5rem 0;
+  padding: 1rem 1rem 1.5rem 1rem;
   border-radius: 30px;
 }
 .jobsList a {
