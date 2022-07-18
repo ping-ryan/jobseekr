@@ -29,8 +29,15 @@ jobApp.getUserQuery = function(){
         const company = document.getElementById('company');
         const location = document.getElementById('location');
         const numResults = document.getElementById('numResults');
-        // pass on userParameters to getJobs function
-        jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value);        
+
+        // get custom sorting attribute
+        document.getElementById('sortResults').addEventListener('change', function(e){
+            const userSortSelection = this.value;
+            jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value, userSortSelection);
+        })
+
+        // pass on userParameters to getJobs function, default sorting parameter is by relevance
+        jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value, 'relevance');
     });
 };
 
@@ -42,9 +49,8 @@ jobApp.getUserQuery = function(){
  * - If the API call fails, display an error message
  * ======================== */
 
-jobApp.getJobs = function(jobTitle, company, location, numResults){
+jobApp.getJobs = function(jobTitle, company, location, numResults, sortByParameter){
     const url = new URL ('https://api.adzuna.com/v1/api/jobs/ca/search')
-    //fetch('https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id='; //+ id + '&app_key=' + key + '&what=' + jobTitle + '&where=' + location + '&company=' + company)
 
     url.search = new URLSearchParams({
         app_id: config.APP_ID,
@@ -52,8 +58,8 @@ jobApp.getJobs = function(jobTitle, company, location, numResults){
         what: jobTitle,
         where: location,
         company: company,
-        results_per_page: numResults
-
+        results_per_page: numResults,
+        sort_by: sortByParameter
     })
 
     fetch(url)
