@@ -191,10 +191,12 @@ jobApp.themeToggle = function(){
             document.getElementById('arrowDown').style.color = '#2D3047';
             document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047';
             document.getElementById('resultsHeader').style.color = '#2D3047';
-            document.getElementById('sortResults').style.backgroundColor = '#FF8552';
+            document.getElementById('sortResults').style.backgroundColor = '#f7e1ce';
             document.getElementById('jobseekrHeader').style.color = '#2D3047';
             document.getElementById('userInput').style.backgroundColor = '#f7e1ce'; 
-            document.getElementById('footer').style.backgroundColor = '#f7e1ce';        
+            document.getElementById('footer').style.backgroundColor = '#f7e1ce';  
+            document.getElementById('previousPage').style.backgroundColor = '#f7e1ce';  
+            document.getElementById('nextPage').style.backgroundColor = '#f7e1ce';        
         
         }else {
             // dark mode
@@ -206,7 +208,9 @@ jobApp.themeToggle = function(){
             document.getElementById('sortResults').style.backgroundColor = '#f6f6f6';
             document.getElementById('jobseekrHeader').style.color = '#f6f6f6';
             document.getElementById('userInput').style.backgroundColor = '#f6f6f6';
-            document.getElementById('footer').style.backgroundColor = '#f6f6f6';    
+            document.getElementById('footer').style.backgroundColor = '#f6f6f6';
+            document.getElementById('previousPage').style.backgroundColor = '#f6f6f6';
+            document.getElementById('nextPage').style.backgroundColor = '#f6f6f6';      
         }
     });
 }
