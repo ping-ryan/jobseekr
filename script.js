@@ -8,7 +8,8 @@ const jobApp = {
     key: config.API_KEY,
     // for pagination
     maxPages: 0,
-    pageNum: 1
+    pageNum: 1,
+    sortByParameter: 'relevance'
 };
 
 // Create an init method to kick off the setup of the application
@@ -31,29 +32,47 @@ jobApp.getUserQuery = function(){
         const location = document.getElementById('location');
 
         // get custom sorting attribute
-        // document.getElementById('sortResults').addEventListener('change', function(e){
-        //     const userSortSelection = this.value;
-        //     console.log(this.value)
-        //     jobApp.getJobs(jobTitle.value, company.value, location.value, userSortSelection);
-        // })
+        document.getElementById('sortResults').addEventListener('change', function(e){
+            jobApp.sortByParameter = this.value;
+            jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+            // reset page to first page if sorting is changed to show first page of results sorted
+            jobApp.pageNum = 1;
+            prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+        });
 
-        // // pagination
-        document.getElementById('previousPage').addEventListener('click', function(e){
+        // pagination
+        const prevButton = document.getElementById('previousPage');
+        prevButton.addEventListener('click', function(e){
             if (jobApp.pageNum > 1){
+                console.log(jobApp.pageNum);
                 jobApp.pageNum--;
-                jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+                console.log(jobApp.pageNum);
+                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+                if (jobApp.pageNum === 1) {
+                    console.log('hi');
+                    prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+                } else {
+                    nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+                }
             }
-        })
+        });
 
-        document.getElementById('nextPage').addEventListener('click', function (e) {
+        const nextButton = document.getElementById('nextPage');
+        nextButton.addEventListener('click', function (e) {
+
             if (jobApp.pageNum < jobApp.maxPages) {
                 jobApp.pageNum++;
-                jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+                if (jobApp.pageNum === jobApp.maxPages) {
+                    nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+                } else {
+                    prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
+                }
             }
-        })
+        });
 
         // pass on userParameters to getJobs function, default sorting parameter is by relevance
-        jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+        jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
     });
 };
 
@@ -76,7 +95,7 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
         company: company,
         sort_by: sortByParameter,
         results_per_page: 10
-    })
+    });
 
     fetch(url)
     .then(function (response) {    
@@ -84,7 +103,7 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
     })
     .then(function (jsonData) {
         jobApp.displayJobs(jsonData.results, jsonData.count);
-    })
+    });
 };   
 
 /* =========================
@@ -98,7 +117,7 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
 jobApp.displayJobs = function(jobs, jobsCount) {
 
     // set max pages to num pages of results (10 results per page)
-    jobApp.maxPages = (jobsCount) / 10;
+    jobApp.maxPages = Math.ceil((jobsCount) / 10);
     document.getElementById('currentPage').textContent = `Page ${jobApp.pageNum} of ${jobApp.maxPages}`;
 
     // show total number of results found
@@ -140,7 +159,7 @@ jobApp.displayJobs = function(jobs, jobsCount) {
         // append each job details to the list
         jobsList.appendChild(listItem);
 
-    })
+    });
 };
 
 // Helper function to format the contract type text (remove _ and capitalize)
