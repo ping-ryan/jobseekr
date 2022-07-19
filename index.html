@@ -66,16 +66,18 @@
         <section class="results">
             <div class="wrapper resultsList">
 
-                <h3 class="resultsHeader">Jobs For You:</h3>
-
-                <div class="sorting">
+                <div class="resultsHead">
+                    <h3 class="resultsHeader">Jobs For You:</h3>
+                </div>
+                
+                <!-- <div class="sorting">
                     <p>Sort by:</p>
                     <label for="sortResults" class="sr-only">Sort Results By</label>
                     <select name="sortResults" id="sortResults">
                         <option value="relevance">Relevance</option>
                         <option value="date">Date Posted</option>
                     </select>
-                </div>
+                </div> -->
 
                 <ul class="jobsList" id="jobsList">
                     <!-- Results will be appended here -->
@@ -83,8 +85,12 @@
                 </ul>
 
                 <div class="pagination">
-                    <button id="previousPage">Previous</button>
-                    <button id="nextPage">Next</button>
+                    <div class="pageButtons">
+                        <button id="previousPage">Previous</button>
+                        <button id="nextPage">Next</button>
+                    </div>
+                    <p id="jobCount"></p>
+                    <p id="currentPage"></p>
                 </div>
 
             </div>

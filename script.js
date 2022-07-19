@@ -4,9 +4,11 @@
 
 // Create an app object (jobApp) & initialize API settings
 const jobApp = {
-    pageNum: 1,
     id: config.APP_ID,
-    key: config.API_KEY
+    key: config.API_KEY,
+    // for pagination
+    maxPages: 0,
+    pageNum: 1
 };
 
 // Create an init method to kick off the setup of the application
@@ -29,19 +31,26 @@ jobApp.getUserQuery = function(){
         const location = document.getElementById('location');
 
         // get custom sorting attribute
-        document.getElementById('sortResults').addEventListener('change', function(e){
-            const userSortSelection = this.value;
-            console.log(this.value)
-            jobApp.getJobs(jobTitle.value, company.value, location.value, userSortSelection);
-        })
+        // document.getElementById('sortResults').addEventListener('change', function(e){
+        //     const userSortSelection = this.value;
+        //     console.log(this.value)
+        //     jobApp.getJobs(jobTitle.value, company.value, location.value, userSortSelection);
+        // })
 
         // // pagination
-        // document.getElementById('previousPage').addEventListener('click', function(e){
-        //     if (jobApp.pageNum > 1){
-        //         jobApp.pageNum--;
-        //         jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
-        //     }
-        // })
+        document.getElementById('previousPage').addEventListener('click', function(e){
+            if (jobApp.pageNum > 1){
+                jobApp.pageNum--;
+                jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+            }
+        })
+
+        document.getElementById('nextPage').addEventListener('click', function (e) {
+            if (jobApp.pageNum < jobApp.maxPages) {
+                jobApp.pageNum++;
+                jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+            }
+        })
 
         // pass on userParameters to getJobs function, default sorting parameter is by relevance
         jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
@@ -65,7 +74,8 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
         what: jobTitle,
         where: location,
         company: company,
-        sort_by: sortByParameter
+        sort_by: sortByParameter,
+        results_per_page: 10
     })
 
     fetch(url)
@@ -73,7 +83,7 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
         return response.json();
     })
     .then(function (jsonData) {
-        jobApp.displayJobs(jsonData.results);
+        jobApp.displayJobs(jsonData.results, jsonData.count);
     })
 };   
 
@@ -85,7 +95,14 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
  * - It finally displays each list item by appending to existing ul 
  * ======================== */
 
-jobApp.displayJobs = function(jobs) {
+jobApp.displayJobs = function(jobs, jobsCount) {
+
+    // set max pages to num pages of results (10 results per page)
+    jobApp.maxPages = (jobsCount) / 10;
+    document.getElementById('currentPage').textContent = `Page ${jobApp.pageNum} of ${jobApp.maxPages}`;
+
+    // show total number of results found
+    document.getElementById('jobCount').textContent = jobsCount + " total results found.";
 
     // clear old results from the ul
     const jobsList = document.getElementById('jobsList');
@@ -106,7 +123,7 @@ jobApp.displayJobs = function(jobs) {
         const jobCompany = document.createElement('p');
         jobCompany.textContent = "Company: " + job.company.display_name;
         const dateCreated = document.createElement('p');
-        dateCreated.textContent = "Date posted: " + job.created;
+        dateCreated.textContent = "Date posted: " + jobApp.formatDate(job.created);
         const description = document.createElement('p');
         description.textContent = "Description: " + job.description;
         
@@ -122,16 +139,20 @@ jobApp.displayJobs = function(jobs) {
 
         // append each job details to the list
         jobsList.appendChild(listItem);
+
     })
 };
 
-
-
-// jobApp.formatString = function(altString){
-//     const finalString = altString.replace('_', ' ');
+// Helper function to format the contract type text (remove _ and capitalize)
+// jobApp.formatContractString = function(str){
+//     let finalString = str.replace('_', '-');
+//     finalString = finalString[0].toUpperCase() + finalString.substring(1);
 //     return finalString;
 // }
 
-
+// Helper function to format the date posted (remove the timestamp)
+jobApp.formatDate = function(date){
+    return date.substring(0,10);
+}
 
 jobApp.init();
