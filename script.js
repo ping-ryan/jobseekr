@@ -2,17 +2,16 @@
  * Initialization steps
  * ======================== */
 
-// Initialize API settings:
-const id = config.APP_ID;
-const key = config.API_KEY;
-
-// Create an app object (jobApp)
-const jobApp = {};
+// Create an app object (jobApp) & initialize API settings
+const jobApp = {
+    pageNum: 1,
+    id: config.APP_ID,
+    key: config.API_KEY
+};
 
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
    jobApp.getUserQuery();
-   
 }
 
 /* =========================
@@ -32,8 +31,17 @@ jobApp.getUserQuery = function(){
         // get custom sorting attribute
         document.getElementById('sortResults').addEventListener('change', function(e){
             const userSortSelection = this.value;
-            jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value, userSortSelection);
+            console.log(this.value)
+            jobApp.getJobs(jobTitle.value, company.value, location.value, userSortSelection);
         })
+
+        // // pagination
+        // document.getElementById('previousPage').addEventListener('click', function(e){
+        //     if (jobApp.pageNum > 1){
+        //         jobApp.pageNum--;
+        //         jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+        //     }
+        // })
 
         // pass on userParameters to getJobs function, default sorting parameter is by relevance
         jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
@@ -49,11 +57,11 @@ jobApp.getUserQuery = function(){
  * ======================== */
 
 jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
-    const url = new URL ('https://api.adzuna.com/v1/api/jobs/ca/search')
+    const url = new URL (`https://api.adzuna.com/v1/api/jobs/ca/search/${jobApp.pageNum}`)
 
     url.search = new URLSearchParams({
-        app_id: config.APP_ID,
-        app_key: config.API_KEY,
+        app_id: jobApp.id,
+        app_key: jobApp.key,
         what: jobTitle,
         where: location,
         company: company,
@@ -61,12 +69,11 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
     })
 
     fetch(url)
-    .then(function (response) {      
+    .then(function (response) {    
         return response.json();
     })
     .then(function (jsonData) {
         jobApp.displayJobs(jsonData.results);
-        console.log(jsonData.results);
     })
 };   
 
