@@ -333,6 +333,10 @@ button {
   cursor: pointer;
 }
 
+.lightTheme {
+  color: #2D3047;
+}
+
 /* =========================
  *  Navigation
  * ======================== */
@@ -395,7 +399,7 @@ button {
   margin-top: -4rem;
 }
 .titleText h2 {
-  color: #21D19F;
+  color: #f6f6f6;
   font-size: 1.5rem;
   text-align: left;
   margin-left: 1rem;
@@ -624,6 +628,7 @@ input {
   padding: 0.7rem;
   text-align: center;
   border-radius: 30px;
+  border-style: none;
 }
 .sorting p {
   margin: 0;
