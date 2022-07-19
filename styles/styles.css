@@ -588,6 +588,18 @@ input {
   margin: 0;
 }
 
+.previousPage {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pageButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+}
+
 footer {
   background-color: #f6f6f6;
   color: #2D3047;

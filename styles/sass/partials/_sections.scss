@@ -157,3 +157,13 @@ input {
         margin: 0;
     }
 }
+
+.previousPage {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.pageButtons {
+    display: flex;
+    gap: 0.5rem;
+}

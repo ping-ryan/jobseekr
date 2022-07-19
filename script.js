@@ -2,17 +2,19 @@
  * Initialization steps
  * ======================== */
 
-// Initialize API settings:
-const id = config.APP_ID;
-const key = config.API_KEY;
-
-// Create an app object (jobApp)
-const jobApp = {};
+// Create an app object (jobApp) & initialize API settings
+const jobApp = {
+    id: config.APP_ID,
+    key: config.API_KEY,
+    // for pagination
+    maxPages: 0,
+    pageNum: 1,
+    sortByParameter: 'relevance'
+};
 
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
    jobApp.getUserQuery();
-   
 }
 
 /* =========================
@@ -31,12 +33,46 @@ jobApp.getUserQuery = function(){
 
         // get custom sorting attribute
         document.getElementById('sortResults').addEventListener('change', function(e){
-            const userSortSelection = this.value;
-            jobApp.getJobs(jobTitle.value, company.value, location.value, numResults.value, userSortSelection);
-        })
+            jobApp.sortByParameter = this.value;
+            jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+            // reset page to first page if sorting is changed to show first page of results sorted
+            jobApp.pageNum = 1;
+            prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+        });
+
+        // pagination
+        const prevButton = document.getElementById('previousPage');
+        prevButton.addEventListener('click', function(e){
+            if (jobApp.pageNum > 1){
+                console.log(jobApp.pageNum);
+                jobApp.pageNum--;
+                console.log(jobApp.pageNum);
+                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+                if (jobApp.pageNum === 1) {
+                    console.log('hi');
+                    prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+                } else {
+                    nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+                }
+            }
+        });
+
+        const nextButton = document.getElementById('nextPage');
+        nextButton.addEventListener('click', function (e) {
+
+            if (jobApp.pageNum < jobApp.maxPages) {
+                jobApp.pageNum++;
+                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+                if (jobApp.pageNum === jobApp.maxPages) {
+                    nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+                } else {
+                    prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
+                }
+            }
+        });
 
         // pass on userParameters to getJobs function, default sorting parameter is by relevance
-        jobApp.getJobs(jobTitle.value, company.value, location.value, 'relevance');
+        jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
     });
 };
 
@@ -49,25 +85,25 @@ jobApp.getUserQuery = function(){
  * ======================== */
 
 jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
-    const url = new URL ('https://api.adzuna.com/v1/api/jobs/ca/search')
+    const url = new URL (`https://api.adzuna.com/v1/api/jobs/ca/search/${jobApp.pageNum}`)
 
     url.search = new URLSearchParams({
-        app_id: config.APP_ID,
-        app_key: config.API_KEY,
+        app_id: jobApp.id,
+        app_key: jobApp.key,
         what: jobTitle,
         where: location,
         company: company,
-        sort_by: sortByParameter
-    })
+        sort_by: sortByParameter,
+        results_per_page: 10
+    });
 
     fetch(url)
-    .then(function (response) {      
+    .then(function (response) {    
         return response.json();
     })
     .then(function (jsonData) {
-        jobApp.displayJobs(jsonData.results);
-        console.log(jsonData.results);
-    })
+        jobApp.displayJobs(jsonData.results, jsonData.count);
+    });
 };   
 
 /* =========================
@@ -78,7 +114,14 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
  * - It finally displays each list item by appending to existing ul 
  * ======================== */
 
-jobApp.displayJobs = function(jobs) {
+jobApp.displayJobs = function(jobs, jobsCount) {
+
+    // set max pages to num pages of results (10 results per page)
+    jobApp.maxPages = Math.ceil((jobsCount) / 10);
+    document.getElementById('currentPage').textContent = `Page ${jobApp.pageNum} of ${jobApp.maxPages}`;
+
+    // show total number of results found
+    document.getElementById('jobCount').textContent = jobsCount + " total results found.";
 
     // clear old results from the ul
     const jobsList = document.getElementById('jobsList');
@@ -99,7 +142,7 @@ jobApp.displayJobs = function(jobs) {
         const jobCompany = document.createElement('p');
         jobCompany.textContent = "Company: " + job.company.display_name;
         const dateCreated = document.createElement('p');
-        dateCreated.textContent = "Date posted: " + job.created;
+        dateCreated.textContent = "Date posted: " + jobApp.formatDate(job.created);
         const description = document.createElement('p');
         description.textContent = "Description: " + job.description;
         
@@ -115,16 +158,20 @@ jobApp.displayJobs = function(jobs) {
 
         // append each job details to the list
         jobsList.appendChild(listItem);
-    })
+
+    });
 };
 
-
-
-// jobApp.formatString = function(altString){
-//     const finalString = altString.replace('_', ' ');
+// Helper function to format the contract type text (remove _ and capitalize)
+// jobApp.formatContractString = function(str){
+//     let finalString = str.replace('_', '-');
+//     finalString = finalString[0].toUpperCase() + finalString.substring(1);
 //     return finalString;
 // }
 
-
+// Helper function to format the date posted (remove the timestamp)
+jobApp.formatDate = function(date){
+    return date.substring(0,10);
+}
 
 jobApp.init();
