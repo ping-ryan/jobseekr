@@ -18,19 +18,21 @@
     <!-- Skip Link, for accessiblity purposes -->
     <a href="#mainContent" class="skip-link">Skip to main content</a>
 
-    <nav>
-        <!-- Light/dark mode -->
-        <div class="lightDarkModeToggle">
-            <button>
-                <span class="sr-only">Website Light Mode</span>
-                <span class="themeToggle" role="img" aria-label="theme toggle"></span>
-                <span class="lightMode" role="img" aria-label="sun"><i class="fa-solid fa-sun"></i></span>
-            </button>
-        </div>
-    </nav>
-
     <!-- HEADER -->
     <header class="homeHeader">
+
+        <!-- Navigation -->
+        <nav class="wrapper mainNav">
+            <!-- Light/dark mode -->
+            <div class="lightDarkModeToggle">
+                <button class="lightDarkModeBtn" id="lightDarkModeBtn">
+                    <span class="sr-only">Website Light Mode</span>
+                    <span class="themeIcon" id="themeIcon" role="img" aria-label="dark or light mode icon"><i class="fa-solid fa-bolt"></i></i></span>
+                    <span class="themeToggle" role="img" aria-label="theme toggle"></span>
+                </button>
+            </div>
+        </nav>
+
         <div class="wrapper titleText">
             <h1>
                 JobSeekr

@@ -333,6 +333,45 @@ button {
   cursor: pointer;
 }
 
+/* =========================
+ *  Navigation
+ * ======================== */
+.mainNav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.mainNav .lightDarkModeToggle {
+  display: none;
+}
+@media (min-width: 900px) {
+  .mainNav .lightDarkModeToggle {
+    display: block;
+  }
+}
+
+.lightDarkModeBtn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #f6f6f6;
+  background-color: transparent;
+  border-radius: 30px;
+  width: 5rem;
+}
+.lightDarkModeBtn i {
+  color: #f6f6f6;
+}
+
+.themeToggle {
+  background-color: #f6f6f6;
+  color: #f6f6f6;
+  height: 0.9rem;
+  width: 0.9rem;
+  border-radius: 50%;
+}
+
+/* =========================
+ *  Hero
+ * ======================== */
 .titleText {
   display: -webkit-box;
   display: -ms-flexbox;

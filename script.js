@@ -9,12 +9,14 @@ const jobApp = {
     // for pagination
     maxPages: 0,
     pageNum: 1,
-    sortByParameter: 'relevance'
+    sortByParameter: 'relevance',
+    isDarkTheme: true
 };
 
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
    jobApp.getUserQuery();
+   jobApp.themeToggle();
 }
 
 /* =========================
@@ -170,5 +172,25 @@ jobApp.displayJobs = function(jobs, jobsCount) {
 jobApp.formatDate = function(date){
     return date.substring(0,10);
 }
+
+/* =========================
+ * Light/dark mode
+ * ======================== */
+
+jobApp.themeToggle = function(){
+    const toggleBtn = document.getElementById('lightDarkModeBtn')
+    const themeIcon = document.getElementById('themeIcon')
+    // if the toggle button is clicked, switch themes
+    toggleBtn.addEventListener('click', function(e){
+        jobApp.isDarkTheme = !jobApp.isDarkTheme;
+
+        if (!jobApp.isDarkTheme){
+            themeIcon.innerHTML = `<i class="fa-solid fa-cloud-moon"></i>`;
+        }else {
+            themeIcon.innerHTML = `<i class="fa-solid fa-bolt"></i>`;
+        }
+    });
+}
+
 
 jobApp.init();

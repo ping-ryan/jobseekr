@@ -1,3 +1,42 @@
+/* =========================
+ *  Navigation
+ * ======================== */
+
+.mainNav {
+    display: flex;
+    .lightDarkModeToggle {
+        display: none;
+        @media (min-width: 900px){
+            display: block;
+        }
+    }
+}
+
+.lightDarkModeBtn {
+    padding: 0.5rem 1rem;
+    border: 2px solid $white;
+    background-color: transparent;
+    border-radius: 30px;
+    width: 5rem;
+    i {
+        color: $white
+    }
+}
+
+.themeToggle {
+    background-color: $white;
+    color: $white;
+    height: 0.9rem;
+    width: 0.9rem;
+    border-radius: 50%;
+}
+
+
+
+/* =========================
+ *  Hero
+ * ======================== */
+
 .titleText {
     display: flex;
     flex-direction: column;
