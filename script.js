@@ -9,12 +9,14 @@ const jobApp = {
     // for pagination
     maxPages: 0,
     pageNum: 1,
-    sortByParameter: 'relevance'
+    sortByParameter: 'relevance',
+    isDarkTheme: true
 };
 
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
    jobApp.getUserQuery();
+   jobApp.themeToggle();
 }
 
 /* =========================
@@ -44,12 +46,9 @@ jobApp.getUserQuery = function(){
         const prevButton = document.getElementById('previousPage');
         prevButton.addEventListener('click', function(e){
             if (jobApp.pageNum > 1){
-                console.log(jobApp.pageNum);
                 jobApp.pageNum--;
-                console.log(jobApp.pageNum);
                 jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
                 if (jobApp.pageNum === 1) {
-                    console.log('hi');
                     prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
                 } else {
                     nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
@@ -173,5 +172,44 @@ jobApp.displayJobs = function(jobs, jobsCount) {
 jobApp.formatDate = function(date){
     return date.substring(0,10);
 }
+
+/* =========================
+ * Light/dark mode
+ * ======================== */
+
+jobApp.themeToggle = function(){
+    const toggleBtn = document.getElementById('lightDarkModeBtn')
+    const themeIcon = document.getElementById('themeIcon')
+    // if the toggle button is clicked, switch themes
+    toggleBtn.addEventListener('click', function(e){
+        jobApp.isDarkTheme = !jobApp.isDarkTheme;
+
+        if (!jobApp.isDarkTheme){
+            // light mode
+            themeIcon.innerHTML = `<i class="fa-solid fa-cloud-moon" style="color:#2D3047;"></i>`;
+            document.body.style.cssText = 'background-color: #f6f6f6; color: #2D3047;'
+            document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047'
+            document.getElementById('resultsHeader').style.color = '#2D3047'
+            document.getElementById('sortResults').style.cssText = 'background-color:#FF8552;'
+            document.getElementById('jobseekrHeader').style.cssText = 'color: #2D3047'
+            document.getElementById('userInput').style.backgroundColor = '#f7e1ce'          
+
+        
+        }else {
+            // dark mode
+            themeIcon.innerHTML = `<i class="fa-solid fa-bolt" style="color:#f6f6f6;"></i>`;
+            document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;'
+            document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6'
+            document.getElementById('resultsHeader').style.color = '#f6f6f6'
+            document.getElementById('sortResults').style.cssText = 'background-color:#f6f6f6;'
+            document.getElementById('jobseekrHeader').style.cssText = 'color: #f6f6f6'
+            document.getElementById('userInput').style.backgroundColor = '#f6f6f6'
+        }
+
+    });
+}
+
+
+
 
 jobApp.init();

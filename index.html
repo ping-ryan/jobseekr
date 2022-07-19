@@ -20,11 +20,28 @@
 
     <!-- HEADER -->
     <header class="homeHeader">
+
+        <!-- Navigation -->
+        <nav class="wrapper mainNav">
+            <!-- Light/dark mode -->
+            <div class="lightDarkModeToggle">
+                <button class="lightDarkModeBtn" id="lightDarkModeBtn">
+                    <span class="sr-only">Website Light Mode</span>
+
+                    <span class="themeIcon" id="themeIcon" role="img" aria-label="dark or light mode icon">
+                        <i class="fa-solid fa-bolt" id="boltIcon"></i>                        
+                    </span>
+
+                    <span class="themeToggle" role="img" aria-label="theme toggle"></span>
+                </button>
+            </div>
+        </nav>
+
         <div class="wrapper titleText">
             <h1>
                 JobSeekr
             </h1>
-            <h2>
+            <h2 id="jobseekrHeader">
                 The job search made easy.
             </h2>
             <div class="bolt">
@@ -38,7 +55,7 @@
     <main id="mainContent">
 
         <!-- USER PROMPT section -->
-        <section class="userInput">
+        <section class="userInput" id="userInput">
             <div class="wrapper">
                 <div class="searchCard">
                     <h3 class="jobSearchHeader">Job Search</h3>
@@ -67,7 +84,7 @@
             <div class="wrapper resultsList">
 
                 <div class="resultsHead">
-                    <h3 class="resultsHeader">Jobs For You:</h3>
+                    <h3 class="resultsHeader" id="resultsHeader">Jobs For You:</h3>
                 </div>
                 
                 <div class="sorting">

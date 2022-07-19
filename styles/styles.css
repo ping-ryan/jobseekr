@@ -333,6 +333,49 @@ button {
   cursor: pointer;
 }
 
+.lightTheme {
+  color: #2D3047;
+}
+
+/* =========================
+ *  Navigation
+ * ======================== */
+.mainNav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.mainNav .lightDarkModeToggle {
+  display: none;
+}
+@media (min-width: 900px) {
+  .mainNav .lightDarkModeToggle {
+    display: block;
+  }
+}
+
+.lightDarkModeBtn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #f6f6f6;
+  background-color: transparent;
+  border-radius: 30px;
+  width: 5rem;
+}
+.lightDarkModeBtn i {
+  color: #f6f6f6;
+}
+
+.themeToggle {
+  background-color: #f6f6f6;
+  color: #f6f6f6;
+  height: 0.9rem;
+  width: 0.9rem;
+  border-radius: 50%;
+}
+
+/* =========================
+ *  Hero
+ * ======================== */
 .titleText {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -356,7 +399,7 @@ button {
   margin-top: -4rem;
 }
 .titleText h2 {
-  color: #21D19F;
+  color: #f6f6f6;
   font-size: 1.5rem;
   text-align: left;
   margin-left: 1rem;
@@ -582,10 +625,17 @@ input {
   background-color: #f6f6f6;
   color: #2D3047;
   font-family: "Montserrat", sans-serif;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  text-align: center;
+  border-radius: 30px;
+  border-style: none;
 }
 .sorting p {
   margin: 0;
+}
+
+.sortResults {
+  background-color: #f6f6f6;
 }
 
 .previousPage {
@@ -598,6 +648,12 @@ input {
   display: -ms-flexbox;
   display: flex;
   gap: 0.5rem;
+}
+.pageButtons button {
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  text-align: center;
+  border-style: none;
 }
 
 footer {
