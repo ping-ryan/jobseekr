@@ -582,7 +582,9 @@ input {
   background-color: #f6f6f6;
   color: #2D3047;
   font-family: "Montserrat", sans-serif;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  text-align: center;
+  border-radius: 30px;
 }
 .sorting p {
   margin: 0;
@@ -598,6 +600,12 @@ input {
   display: -ms-flexbox;
   display: flex;
   gap: 0.5rem;
+}
+.pageButtons button {
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  text-align: center;
+  border-style: none;
 }
 
 footer {
