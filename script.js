@@ -44,12 +44,9 @@ jobApp.getUserQuery = function(){
         const prevButton = document.getElementById('previousPage');
         prevButton.addEventListener('click', function(e){
             if (jobApp.pageNum > 1){
-                console.log(jobApp.pageNum);
                 jobApp.pageNum--;
-                console.log(jobApp.pageNum);
                 jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
                 if (jobApp.pageNum === 1) {
-                    console.log('hi');
                     prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
                 } else {
                     nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
