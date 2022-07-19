@@ -185,23 +185,25 @@ jobApp.themeToggle = function(){
         jobApp.isDarkTheme = !jobApp.isDarkTheme;
 
         if (!jobApp.isDarkTheme){
-            themeIcon.innerHTML = `<i class="fa-solid fa-cloud-moon" style="color:#2D3047;"></i>`;
             // light mode
+            themeIcon.innerHTML = `<i class="fa-solid fa-cloud-moon" style="color:#2D3047;"></i>`;
             document.body.style.cssText = 'background-color: #f6f6f6; color: #2D3047;'
             document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047'
             document.getElementById('resultsHeader').style.color = '#2D3047'
             document.getElementById('sortResults').style.cssText = 'background-color:#FF8552;'
             document.getElementById('jobseekrHeader').style.cssText = 'color: #2D3047'
-            document.getElementById('userInput').style.backgroundColor = '#f7e1ce'
+            document.getElementById('userInput').style.backgroundColor = '#f7e1ce'          
 
-
-
-            
-
-            // document.getElementById('boltIcon').style.cssText = 'color: #2D3047'
+        
         }else {
-            themeIcon.innerHTML = `<i class="fa-solid fa-bolt"></i>`;
             // dark mode
+            themeIcon.innerHTML = `<i class="fa-solid fa-bolt" style="color:#f6f6f6;"></i>`;
+            document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;'
+            document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6'
+            document.getElementById('resultsHeader').style.color = '#f6f6f6'
+            document.getElementById('sortResults').style.cssText = 'background-color:#f6f6f6;'
+            document.getElementById('jobseekrHeader').style.cssText = 'color: #f6f6f6'
+            document.getElementById('userInput').style.backgroundColor = '#f6f6f6'
         }
 
     });

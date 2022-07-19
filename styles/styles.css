@@ -634,6 +634,10 @@ input {
   margin: 0;
 }
 
+.sortResults {
+  background-color: #f6f6f6;
+}
+
 .previousPage {
   opacity: 0.3;
   pointer-events: none;
