@@ -198,7 +198,7 @@ jobApp.themeToggle = function(){
         
         }else {
             // dark mode
-            themeIcon.innerHTML = `<i class="fa-solid fa-bolt" style="color:#f6f6f6;"></i>`;
+            themeIcon.innerHTML = `<i class="fa-solid fa-cloud-sun" style="color:#f6f6f6;"></i>`;
             document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;';
             document.getElementById('arrowDown').style.color = '#f6f6f6';
             document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6';
