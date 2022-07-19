@@ -178,8 +178,8 @@ jobApp.formatDate = function(date){
  * ======================== */
 
 jobApp.themeToggle = function(){
-    const toggleBtn = document.getElementById('lightDarkModeBtn')
-    const themeIcon = document.getElementById('themeIcon')
+    const toggleBtn = document.getElementById('lightDarkModeBtn');
+    const themeIcon = document.getElementById('themeIcon');
     // if the toggle button is clicked, switch themes
     toggleBtn.addEventListener('click', function(e){
         jobApp.isDarkTheme = !jobApp.isDarkTheme;
@@ -187,25 +187,27 @@ jobApp.themeToggle = function(){
         if (!jobApp.isDarkTheme){
             // light mode
             themeIcon.innerHTML = `<i class="fa-solid fa-cloud-moon" style="color:#2D3047;"></i>`;
-            document.body.style.cssText = 'background-color: #f6f6f6; color: #2D3047;'
-            document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047'
-            document.getElementById('resultsHeader').style.color = '#2D3047'
-            document.getElementById('sortResults').style.cssText = 'background-color:#FF8552;'
-            document.getElementById('jobseekrHeader').style.cssText = 'color: #2D3047'
-            document.getElementById('userInput').style.backgroundColor = '#f7e1ce'          
-
+            document.body.style.cssText = 'background-color: #f6f6f6; color: #2D3047;';
+            document.getElementById('arrowDown').style.color = '#2D3047';
+            document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047';
+            document.getElementById('resultsHeader').style.color = '#2D3047';
+            document.getElementById('sortResults').style.backgroundColor = '#FF8552';
+            document.getElementById('jobseekrHeader').style.color = '#2D3047';
+            document.getElementById('userInput').style.backgroundColor = '#f7e1ce'; 
+            document.getElementById('footer').style.backgroundColor = '#f7e1ce';        
         
         }else {
             // dark mode
             themeIcon.innerHTML = `<i class="fa-solid fa-bolt" style="color:#f6f6f6;"></i>`;
-            document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;'
-            document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6'
-            document.getElementById('resultsHeader').style.color = '#f6f6f6'
-            document.getElementById('sortResults').style.cssText = 'background-color:#f6f6f6;'
-            document.getElementById('jobseekrHeader').style.cssText = 'color: #f6f6f6'
-            document.getElementById('userInput').style.backgroundColor = '#f6f6f6'
+            document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;';
+            document.getElementById('arrowDown').style.color = '#f6f6f6';
+            document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6';
+            document.getElementById('resultsHeader').style.color = '#f6f6f6';
+            document.getElementById('sortResults').style.backgroundColor = '#f6f6f6';
+            document.getElementById('jobseekrHeader').style.color = '#f6f6f6';
+            document.getElementById('userInput').style.backgroundColor = '#f6f6f6';
+            document.getElementById('footer').style.backgroundColor = '#f6f6f6';    
         }
-
     });
 }
 

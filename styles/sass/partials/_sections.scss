@@ -1,5 +1,7 @@
 body {
     background-color: $black;
+    // transition for light/dark mode
+    transition: all 500ms;
 }
 
 /* =========================

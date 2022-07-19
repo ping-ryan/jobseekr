@@ -427,6 +427,8 @@ button {
 
 body {
   background-color: #2D3047;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
 }
 
 /* =========================
