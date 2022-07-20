@@ -1,5 +1,7 @@
 body {
     background-color: $black;
+    // transition for light/dark mode
+    transition: all 500ms;
 }
 
 /* =========================
@@ -178,5 +180,6 @@ input {
         padding: 0.4rem 1rem;
         text-align: center;
         border-style: none;
+        background-color: $white;
     }
 }
