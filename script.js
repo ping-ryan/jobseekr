@@ -7,7 +7,7 @@ const jobApp = {
     id: config.APP_ID,
     key: config.API_KEY,
     // for pagination
-    maxPages: 0,
+    maxPages: 1,
     pageNum: 1,
     sortByParameter: 'relevance',
     isDarkTheme: true
@@ -83,7 +83,11 @@ jobApp.getUserQuery = function(){
  * - If the API call fails, display an error message
  * ======================== */
 
-jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
+// look up arrow function & async
+jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
+
+    
+    
     const url = new URL (`https://api.adzuna.com/v1/api/jobs/ca/search/${jobApp.pageNum}`)
 
     url.search = new URLSearchParams({
@@ -96,13 +100,21 @@ jobApp.getJobs = function(jobTitle, company, location, sortByParameter){
         results_per_page: 10
     });
 
-    fetch(url)
-    .then(function (response) {    
-        return response.json();
-    })
-    .then(function (jsonData) {
-        jobApp.displayJobs(jsonData.results, jsonData.count);
-    });
+    try {
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        // error handling - when there are no results identified
+        if (jsonData.count === 0){
+            document.getElementById('jobsList').innerHTML = '';
+            document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
+        } else {
+            jobApp.displayJobs(jsonData.results, jsonData.count);
+        }
+    }
+    catch(error) {
+        document.getElementById('jobsList').innerHTML = '';
+        document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
+    }
 };   
 
 /* =========================
@@ -214,8 +226,5 @@ jobApp.themeToggle = function(){
         }
     });
 }
-
-
-
 
 jobApp.init();
