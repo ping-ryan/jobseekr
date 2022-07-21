@@ -4,12 +4,15 @@
 
 // Create an app object (jobApp) & initialize API settings
 const jobApp = {
+    // API
     id: config.APP_ID,
     key: config.API_KEY,
     // for pagination
     maxPages: 1,
     pageNum: 1,
+    // for sorting
     sortByParameter: 'relevance',
+    // light/dark mode toggle
     isDarkTheme: true
 };
 
@@ -33,47 +36,69 @@ jobApp.getUserQuery = function(){
         const company = document.getElementById('company');
         const location = document.getElementById('location');
 
-        // get custom sorting attribute
-        document.getElementById('sortResults').addEventListener('change', function(e){
-            jobApp.sortByParameter = this.value;
-            jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
-            // reset page to first page if sorting is changed to show first page of results sorted
-            jobApp.pageNum = 1;
-            prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-        });
+        // check if user, if so, sort results with a new API call 
+        jobApp.checkSort(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
 
-        // pagination
-        const prevButton = document.getElementById('previousPage');
-        prevButton.addEventListener('click', function(e){
-            if (jobApp.pageNum > 1){
-                jobApp.pageNum--;
-                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
-                if (jobApp.pageNum === 1) {
-                    prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-                } else {
-                    nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
-                }
-            }
-        });
-
-        const nextButton = document.getElementById('nextPage');
-        nextButton.addEventListener('click', function (e) {
-
-            if (jobApp.pageNum < jobApp.maxPages) {
-                jobApp.pageNum++;
-                jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
-                if (jobApp.pageNum === jobApp.maxPages) {
-                    nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-                } else {
-                    prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
-                }
-            }
-        });
+        // check if user wants to change page, if so, change pages with a new API call
+        jobApp.checkPageChange(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
 
         // pass on userParameters to getJobs function, default sorting parameter is by relevance
         jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+
     });
 };
+
+/* =========================
+ * checkPageChange method
+ * - This method checks if the user wants to change the page of results displayed after the submit
+ * - If they want a different page, call the API again to retrieve results for that page
+ * ======================== */   
+
+jobApp.checkPageChange = function (jobTitle, company, location, sortByParameter) {
+    const prevButton = document.getElementById('previousPage');
+    prevButton.addEventListener('click', function (e) {
+        if (jobApp.pageNum > 1) {
+            jobApp.pageNum--;
+            jobApp.getJobs(jobTitle, company, location, sortByParameter);
+            if (jobApp.pageNum === 1) {
+                prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+            } else {
+                nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+            }
+        }
+    });
+
+    const nextButton = document.getElementById('nextPage');
+    nextButton.addEventListener('click', function (e) {
+
+        if (jobApp.pageNum < jobApp.maxPages) {
+            jobApp.pageNum++;
+            jobApp.getJobs(jobTitle, company, location, sortByParameter);
+            if (jobApp.pageNum === jobApp.maxPages) {
+                nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+            } else {
+                prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
+            }
+        }
+    });
+}
+
+/* =========================
+ * checkSort method
+ * - This method checks if the user wants to sort results displayed after the submit
+ * - If they want to sort by date instead of relevance (default), call API again with desired sorting parameter
+ * ======================== */
+
+jobApp.checkSort = function(jobTitle, company, location, sortByParameter) {
+    document.getElementById('sortResults').addEventListener('change', function (e) {
+        sortByParameter = this.value;
+        jobApp.getJobs(jobTitle, company, location, sortByParameter);
+
+        // reset page to first page if sorting is changed to show first page of results sorted
+        jobApp.pageNum = 1;
+        prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+    });
+}
 
 /* =========================
  * getJobs method
@@ -105,17 +130,27 @@ jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
         const jsonData = await response.json();
         // error handling - when there are no results identified
         if (jsonData.count === 0){
-            document.getElementById('jobsList').innerHTML = '';
-            document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
+            jobApp.showErrorMsg();
         } else {
             jobApp.displayJobs(jsonData.results, jsonData.count);
         }
     }
     catch(error) {
-        document.getElementById('jobsList').innerHTML = '';
-        document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
+        jobApp.showErrorMsg();
     }
 };   
+
+/* =========================
+ * showErrorMsg method
+ * - This method displays a basic user-friendly messages if no jobs match the parameters or the API call fails
+ * ======================== */
+
+jobApp.showErrorMsg = function(){
+    document.getElementById('jobsList').innerHTML = '';
+    document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
+    document.getElementById('currentPage').textContent = '';
+    document.getElementById('jobCount').textContent = '';
+}
 
 /* =========================
  * displayJobs method
