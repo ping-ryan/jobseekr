@@ -2,6 +2,8 @@
  * Initialization steps
  * ======================== */
 
+// NOTE: Azduna API Limits are 25/min, 250/day, 1000/week, 2500/month
+
 // Create an app object (jobApp) & initialize API settings
 const jobApp = {
     // API
@@ -108,22 +110,28 @@ jobApp.checkSort = function(jobTitle, company, location, sortByParameter) {
  * - If the API call fails, display an error message
  * ======================== */
 
-// look up arrow function & async
 jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
-
-    
     
     const url = new URL (`https://api.adzuna.com/v1/api/jobs/ca/search/${jobApp.pageNum}`)
 
-    url.search = new URLSearchParams({
+    let data = {
         app_id: jobApp.id,
         app_key: jobApp.key,
-        what: jobTitle,
-        where: location,
-        company: company,
         sort_by: sortByParameter,
         results_per_page: 10
-    });
+    }
+
+    if (jobTitle){
+        data.what = jobTitle;
+    }
+    if (location) {
+        data.where = location;
+    }
+    if (company) {
+        data.company = company;
+    }
+
+    url.search = new URLSearchParams(data);
 
     try {
         const response = await fetch(url);
@@ -136,6 +144,7 @@ jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
         }
     }
     catch(error) {
+        console.log(error);
         jobApp.showErrorMsg();
     }
 };   
@@ -182,7 +191,7 @@ jobApp.displayJobs = function(jobs, jobsCount) {
         const jobTitle = document.createElement('p');
         jobTitle.textContent = "Title: " + job.title;
         const contractLength = document.createElement('p');
-        contractLength.textContent = "Contract Type: " + job.contract_time;
+        contractLength.textContent = "Contract Type: " + jobApp.formatString(job.contract_time);
         const jobLocation = document.createElement('p');
         jobLocation.textContent = "Location: " + job.location.display_name;
         const jobCompany = document.createElement('p');
@@ -209,11 +218,15 @@ jobApp.displayJobs = function(jobs, jobsCount) {
 };
 
 // Helper function to format the contract type text (remove _ and capitalize)
-// jobApp.formatContractString = function(str){
-//     let finalString = str.replace('_', '-');
-//     finalString = finalString[0].toUpperCase() + finalString.substring(1);
-//     return finalString;
-// }
+jobApp.formatString = function(str){
+    if(str){
+        let finalString = str.replace('_', '-');
+        finalString = finalString[0].toUpperCase() + finalString.substring(1);
+        return finalString;
+    } else {
+        return 'N/A';
+    }
+}
 
 // Helper function to format the date posted (remove the timestamp)
 jobApp.formatDate = function(date){
@@ -227,6 +240,7 @@ jobApp.formatDate = function(date){
 jobApp.themeToggle = function(){
     const toggleBtn = document.getElementById('lightDarkModeBtn');
     const themeIcon = document.getElementById('themeIcon');
+
     // if the toggle button is clicked, switch themes
     toggleBtn.addEventListener('click', function(e){
         jobApp.isDarkTheme = !jobApp.isDarkTheme;
