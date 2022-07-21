@@ -7,8 +7,8 @@
 // Create an app object (jobApp) & initialize API settings
 const jobApp = {
     // API
-    id: config.APP_ID,
-    key: config.API_KEY,
+    id: APP_ID,
+    key: API_KEY,
     // for pagination
     maxPages: 1,
     pageNum: 1,
