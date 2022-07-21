@@ -1,3 +1,5 @@
+import { APP_ID, API_KEY } from "./config.js"
+
 /* =========================
  * Initialization steps
  * ======================== */
@@ -7,8 +9,8 @@
 // Create an app object (jobApp) & initialize API settings
 const jobApp = {
     // API
-    id: process.env.APP_ID,
-    key: process.env.API_KEY,
+    id: APP_ID,
+    key: API_KEY,
     // for pagination
     maxPages: 1,
     pageNum: 1,
