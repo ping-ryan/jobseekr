@@ -427,6 +427,7 @@ button {
   text-align: left;
   margin-left: 1rem;
   margin-top: -0.5rem;
+  text-align: center;
 }
 
 .bolt {
@@ -614,6 +615,7 @@ input {
           flex-direction: column;
   gap: 4rem;
   width: 100%;
+  padding-bottom: 3rem;
 }
 .jobsList li {
   border: 2px solid #FF8552;
@@ -640,6 +642,16 @@ input {
 
 .sorting {
   padding-bottom: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0.7rem;
 }
 @media (min-width: 900px) {
   .sorting {

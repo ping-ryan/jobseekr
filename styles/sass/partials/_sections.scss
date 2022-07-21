@@ -119,6 +119,7 @@ input {
     flex-direction: column;
     gap: 4rem;
     width: 100%;
+    padding-bottom: 3rem;
     li {
         border: 2px solid $accent;
         padding: 1rem 1rem 1.5rem 1rem;
@@ -146,6 +147,10 @@ input {
 
 .sorting {
     padding-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
     @media (min-width: 900px) {
         padding-bottom: 3.5rem;
     }
