@@ -1,5 +1,7 @@
 # Juno Project 2: jobseekr
 
+**View live site [here](https://jobseekr.netlify.app/).**
+
 ## Objective
 
 To build an application in order to show an understanding of working with third-party APIs, JavaScript, DOM manipulation, error handling and UI design, and to demonstrate competence in pair programming and communication.
