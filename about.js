@@ -27,7 +27,7 @@ aboutPage.themeToggle = function(){
             document.querySelectorAll('.profileImg').forEach(function(img) {
                 img.style.backgroundColor = '#f7e1ce';
             });
-            document.querySelectorAll("h2, h3, i").forEach(function(content) {
+            document.querySelectorAll("h2, h4, i").forEach(function(content) {
                 content.style.color = '#2D3047';
             });             
         
@@ -44,7 +44,7 @@ aboutPage.themeToggle = function(){
             document.querySelectorAll('.profileImg').forEach(function(img) {
                 img.style.backgroundColor = '#f6f6f6';
             });
-            document.querySelectorAll("h2, h3, i").forEach(function(content) {
+            document.querySelectorAll("h2, h4, i").forEach(function(content) {
                 content.style.color = '#f6f6f6';
             });            
         }

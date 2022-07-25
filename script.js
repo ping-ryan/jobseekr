@@ -146,7 +146,6 @@ jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
         }
     }
     catch(error) {
-        console.log(error);
         jobApp.showErrorMsg();
     }
 };   
