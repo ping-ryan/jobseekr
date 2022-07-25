@@ -365,6 +365,9 @@ button:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 1rem;
 }
 .mainNav .lightDarkModeToggle {
@@ -373,6 +376,13 @@ button:hover {
 @media (min-width: 900px) {
   .mainNav .lightDarkModeToggle {
     display: block;
+  }
+}
+@media (min-width: 900px) {
+  .mainNav {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 }
 
@@ -393,6 +403,20 @@ button:hover {
   height: 0.9rem;
   width: 0.9rem;
   border-radius: 50%;
+}
+
+.navLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+}
+.navLinks a:hover {
+  color: #FF8552;
+}
+
+.hoverClass:hover {
+  color: #FF8552 !important;
 }
 
 /* =========================
@@ -458,8 +482,8 @@ body {
 .skip-link {
   position: absolute;
   right: 50%;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+  -webkit-transform: translateY(-150%);
+          transform: translateY(-150%);
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
@@ -768,4 +792,8 @@ footer a:hover {
 .jobsList li:nth-child(6) {
   -webkit-animation-delay: 0.75s;
           animation-delay: 0.75s;
+}
+
+.pageHeader .titleText {
+  min-height: 30vh;
 }

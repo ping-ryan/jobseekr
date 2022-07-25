@@ -12,7 +12,7 @@ body {
 .skip-link {
     position: absolute;
     right: 50%;
-    transform: translateY(-100%);
+    transform: translateY(-150%);
     transition: transform 0.3s;
     font-family: $body-font, sans-serif;
     background-color: $white;
