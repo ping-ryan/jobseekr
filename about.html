@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Source+Code+Pro:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Style sheet -->
+    <link rel="stylesheet" href="./styles/styles.css">
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/f21b5dfadd.js" crossorigin="anonymous"></script>
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" size="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" size="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+    <!-- JS scripts -->
+    <script defer src="about.js" type="module"></script>
+    <title>JobSeekr - About</title>
+</head>
+
+<body>
+    <!-- Skip Link, for accessiblity purposes -->
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+    <!-- HEADER -->
+    <header class="pageHeader">
+
+        <!-- Navigation -->
+        <nav class="wrapper mainNav">
+            <!-- Light/dark mode -->
+            <div class="lightDarkModeToggle">
+                <button class="lightDarkModeBtn" id="lightDarkModeBtn">
+                    <span class="sr-only">Website Light Mode</span>
+                    <span class="themeIcon" id="themeIcon" role="img" aria-label="dark or light mode icon">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </span>
+                    <span class="themeToggle" role="img" aria-label="theme toggle"></span>
+                </button>
+            </div>
+            <ul class="navLinks">
+                <li class="pages">
+                    <a href="/" class="navLink">Home</a>
+                </li>
+                <li class="pages">
+                    <a href="./about.html" class="navLink">About</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="wrapper titleText">
+            <h1>About JobSeekr</h1>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main id="mainContent">
+        <div class="wrapper pageContent">
+            <div class="appInfoContainer">
+                <div class="imgContent">
+                    <img src="./assets/about-us.svg" alt="An illustration of a woman zooming into an online user profile">
+                </div>
+                <div class="textContent">
+                    <h2>What is JobSeekr?</h2>
+                    <p>This application allows users to look for jobs in the location of their choice with specified
+                    criterias (e.g., by company). A job seeker is typically inundated with job openings that may not suit their preferences due to popular job seeking websites having millions of listings. This app allows the user to not be overwhelmed as they are recommended a curated selection of job postings matching their search criteria, all within a simple UI.</p>
+                    <h2>Limitations</h2>
+                    <p>Note that the Adzuna API has limited API calls/ day which may explain why no results show up for a basic search. In addition, it has limited capabilities and a select list of job information available.</p>
+                </div>
+            </div>
+            <div class="teamContainer">
+                <h2 class="teamHeader">Team</h2>
+                <div class="creators">
+                    <div class="creator">
+                        <h3 class="creatorName">Ping Yu</h3>
+                        <div class="profileImg">
+                            <img src="./assets/female-dev.svg" alt="A female programmer">
+                        </div>
+                        <p>Co-founder</p>
+                        <div class="socialLinks">
+                            <a href="https://github.com/pinggyu"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/pingyuuu"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="creator">
+                        <h3 class="creatorName">Ryan Stedman</h3>
+                        <div class="profileImg">
+                            <img src="./assets/male-dev.svg" alt="A male programmer">
+                        </div>
+                        <p>Co-founder</p>
+                        <div class="socialLinks">
+                            <a href="#"><i class="fa-brands fa-github"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER section -->
+    <footer id="footer">
+        Copyright © Created at <a href="https://junocollege.com/">Juno College </a> using the <a
+            href="https://developer.adzuna.com/overview">Adzuna API</a>
+    </footer>
+
+</body>
+</html>

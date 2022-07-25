@@ -14,12 +14,16 @@
 .mainNav {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-top: 1rem;
     .lightDarkModeToggle {
         display: none;
         @media (min-width: 900px){
             display: block;
         }
+    }
+    @media (min-width: 900px) {
+        justify-content: space-between;
     }
 }
 
@@ -40,6 +44,20 @@
     height: 0.9rem;
     width: 0.9rem;
     border-radius: 50%;
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.5rem;
+    a:hover {
+        color: $accent;
+    }
+}
+
+// to make the hover over nav links work after light/dark mode toggle has been triggered
+// JS cannot target pseudo elements dynamically
+.hoverClass:hover{
+    color: $accent !important;
 }
 
 /* =========================

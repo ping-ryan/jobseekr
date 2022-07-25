@@ -259,7 +259,11 @@ jobApp.themeToggle = function(){
             document.getElementById('userInput').style.backgroundColor = '#f7e1ce'; 
             document.getElementById('footer').style.backgroundColor = '#f7e1ce';  
             document.getElementById('previousPage').style.backgroundColor = '#f7e1ce';  
-            document.getElementById('nextPage').style.backgroundColor = '#f7e1ce';        
+            document.getElementById('nextPage').style.backgroundColor = '#f7e1ce';
+            document.querySelectorAll('.navLink').forEach(function(link) {
+                link.style.color = '#2D3047';
+                link.classList.add('hoverClass');
+            });      
         
         }else {
             // dark mode
@@ -273,7 +277,11 @@ jobApp.themeToggle = function(){
             document.getElementById('userInput').style.backgroundColor = '#f6f6f6';
             document.getElementById('footer').style.backgroundColor = '#f6f6f6';
             document.getElementById('previousPage').style.backgroundColor = '#f6f6f6';
-            document.getElementById('nextPage').style.backgroundColor = '#f6f6f6';      
+            document.getElementById('nextPage').style.backgroundColor = '#f6f6f6';   
+            document.querySelectorAll('.navLink').forEach(function(link) {
+                link.style.color = '#f6f6f6';
+                link.classList.add('hoverClass');
+            });      
         }
     });
 }
