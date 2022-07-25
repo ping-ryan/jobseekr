@@ -3,3 +3,72 @@
         min-height: 30vh;
     }
 }
+
+.pageContent {
+    padding-bottom: 6rem;
+}
+
+.appInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+    .imgContent {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 2rem;
+        img {
+            max-width: 300px;
+            @media (min-width: 600px) {
+                max-width: 450px;
+            }
+        }
+    }
+    .textContent {
+        flex: 1;
+        text-align: center;
+    }
+    @media  (min-width: 900px) {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+.teamContainer {
+    padding: 2rem 0;
+    .creatorName {
+        padding-bottom: 3rem;
+    }
+    .creators {
+        display: flex;
+        gap: 4rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @media (min-width: 900px) {
+            flex-direction: row;
+        }
+    }
+    .creator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .teamHeader {
+        padding-bottom: 4rem;
+        color: $accent;
+    }
+    i {
+        font-size: 2rem;
+    }
+    .profileImg {
+        border-radius: 50%;
+        background-color: $white;
+        width: 200px;
+        height: 200px;
+        display: flex;
+    }
+}

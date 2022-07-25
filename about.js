@@ -23,7 +23,13 @@ aboutPage.themeToggle = function(){
             document.querySelectorAll('.navLink').forEach(function(link) {
                 link.style.color = '#2D3047';
                 link.classList.add('hoverClass');
-            });      
+            });
+            document.querySelectorAll('.profileImg').forEach(function(img) {
+                img.style.backgroundColor = '#f7e1ce';
+            });
+            document.querySelectorAll("h2, h3, i").forEach(function(content) {
+                content.style.color = '#2D3047';
+            });             
         
         }else {
             // dark mode
@@ -34,7 +40,13 @@ aboutPage.themeToggle = function(){
             document.querySelectorAll('.navLink').forEach(function(link) {
                 link.style.color = '#f6f6f6';
                 link.classList.add('hoverClass');
-            });      
+            });
+            document.querySelectorAll('.profileImg').forEach(function(img) {
+                img.style.backgroundColor = '#f6f6f6';
+            });
+            document.querySelectorAll("h2, h3, i").forEach(function(content) {
+                content.style.color = '#f6f6f6';
+            });            
         }
     });
 }
