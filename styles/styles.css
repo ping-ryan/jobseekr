@@ -243,7 +243,7 @@ h4 {
 
 h1 {
   font-size: clamp(3.5rem, 9vw, 5rem);
-  line-height: 5.75;
+  line-height: 1.75;
 }
 
 h2 {
@@ -331,10 +331,11 @@ h4 {
 
 button {
   cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
-
-.lightTheme {
-  color: #2D3047;
+button:hover {
+  color: #FF8552;
 }
 
 /* =========================
@@ -417,16 +418,12 @@ button {
 }
 .titleText h1 {
   color: #FF8552;
-  margin-bottom: -5rem;
   font-size: 3rem;
-  margin-top: -4rem;
 }
 .titleText h2 {
   color: #f6f6f6;
   font-size: 1.5rem;
   text-align: left;
-  margin-left: 1rem;
-  margin-top: -0.5rem;
   text-align: center;
 }
 
@@ -446,7 +443,7 @@ button {
   font-size: clamp(1.5rem, 5vw, 2rem);
   color: #f6f6f6;
   position: absolute;
-  bottom: 5rem;
+  bottom: 10%;
 }
 
 body {
