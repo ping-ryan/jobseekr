@@ -917,6 +917,11 @@ footer a:hover {
 }
 .teamContainer i {
   font-size: 2rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.teamContainer i:hover {
+  color: #FF8552;
 }
 .teamContainer .profileImg {
   border-radius: 50%;

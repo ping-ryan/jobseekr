@@ -63,6 +63,10 @@
     }
     i {
         font-size: 2rem;
+        transition: 0.3s;
+        &:hover {
+            color: $accent;
+        }
     }
     .profileImg {
         border-radius: 50%;
