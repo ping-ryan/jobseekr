@@ -457,6 +457,7 @@ body {
 .titleText h1 {
   color: #FF8552;
   font-size: 3rem;
+  padding-bottom: 1rem;
 }
 .titleText h2 {
   color: #f6f6f6;
@@ -669,6 +670,8 @@ input {
   background-color: #FF8552;
   padding: 0.5rem 2rem;
   border-radius: 30px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 .jobsList a:hover {
   background-color: #f6f6f6;
@@ -710,7 +713,7 @@ input {
   background-color: #f6f6f6;
 }
 
-.previousPage {
+.previousPage, .nextPage {
   opacity: 0.3;
   pointer-events: none;
 }
@@ -859,14 +862,13 @@ footer a:hover {
           flex: 1;
   text-align: center;
 }
-@media (min-width: 900px) {
-  .appInfoContainer {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+@media (min-width: 1367px) {
+  .appInfoContainer .textContent {
     text-align: left;
   }
+}
+.appInfoContainer .limitationsText {
+  padding-top: 1rem;
 }
 
 .teamContainer {
@@ -914,6 +916,7 @@ footer a:hover {
 .teamContainer .teamHeader {
   padding-bottom: 4rem;
   color: #FF8552;
+  font-size: clamp(2.25rem, 3vw, 2.625rem);
 }
 .teamContainer i {
   font-size: 2rem;

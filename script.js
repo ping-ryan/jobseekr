@@ -14,123 +14,93 @@ const jobApp = {
     // for pagination
     maxPages: 1,
     pageNum: 1,
+    prevButton: document.getElementById('previousPage'),
+    nextButton: document.getElementById('nextPage'),
     // for sorting
     sortByParameter: 'relevance',
+    sortBtn: document.getElementById('sortResults'),
     // light/dark mode toggle
-    isDarkTheme: true
+    isDarkTheme: true,
+    // user inputs
+    jobTitle: '',
+    company: '',
+    location: ''
 };
 
 // Create an init method to kick off the setup of the application
 jobApp.init = function() {
-   jobApp.getUserQuery();
-   jobApp.themeToggle();
+    jobApp.getUserQuery();
+    // check if user wants to change page, if so, change pages with a new API call
+    jobApp.checkPageChange();
+    // check if user, if so, sort results with a new API call 
+    jobApp.checkSort();
+    jobApp.themeToggle();
 }
 
 /* =========================
  * getUserQuery method
  * - This method has an event listener on the submit button of the user form
- * - When user parameters are inputted, it passes them to the getJobs() method
+ * - When new user parameters are submitted, it calls the getJobs method()
  * ======================== */
 
 jobApp.getUserQuery = function(){
     const userForm = document.getElementById('userForm');
     userForm.addEventListener('submit', function(e){
-        e.preventDefault();       
-        const jobTitle = document.getElementById('jobTitle');
-        const company = document.getElementById('company');
-        const location = document.getElementById('location');
+        e.preventDefault();    
+        
+        // clear previous search data
+        jobApp.resetQuery();
 
-        // check if user, if so, sort results with a new API call 
-        jobApp.checkSort(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+        // get new user query 
+        jobApp.jobTitle = document.getElementById('jobTitle');
+        jobApp.company = document.getElementById('company');
+        jobApp.location = document.getElementById('location');
 
-        // check if user wants to change page, if so, change pages with a new API call
-        jobApp.checkPageChange(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
-
-        // pass on userParameters to getJobs function, default sorting parameter is by relevance
-        jobApp.getJobs(jobTitle.value, company.value, location.value, jobApp.sortByParameter);
+        // get matching jobs
+        jobApp.getJobs();
 
     });
 };
 
-/* =========================
- * checkPageChange method
- * - This method checks if the user wants to change the page of results displayed after the submit
- * - If they want a different page, call the API again to retrieve results for that page
- * ======================== */   
-
-jobApp.checkPageChange = function (jobTitle, company, location, sortByParameter) {
-    const prevButton = document.getElementById('previousPage');
-    prevButton.addEventListener('click', function (e) {
-        if (jobApp.pageNum > 1) {
-            jobApp.pageNum--;
-            jobApp.getJobs(jobTitle, company, location, sortByParameter);
-            if (jobApp.pageNum === 1) {
-                prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-            } else {
-                nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
-            }
-        }
-    });
-
-    const nextButton = document.getElementById('nextPage');
-    nextButton.addEventListener('click', function (e) {
-
-        if (jobApp.pageNum < jobApp.maxPages) {
-            jobApp.pageNum++;
-            jobApp.getJobs(jobTitle, company, location, sortByParameter);
-            if (jobApp.pageNum === jobApp.maxPages) {
-                nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-            } else {
-                prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
-            }
-        }
-    });
-}
-
-/* =========================
- * checkSort method
- * - This method checks if the user wants to sort results displayed after the submit
- * - If they want to sort by date instead of relevance (default), call API again with desired sorting parameter
- * ======================== */
-
-jobApp.checkSort = function(jobTitle, company, location, sortByParameter) {
-    document.getElementById('sortResults').addEventListener('change', function (e) {
-        sortByParameter = this.value;
-        jobApp.getJobs(jobTitle, company, location, sortByParameter);
-
-        // reset page to first page if sorting is changed to show first page of results sorted
-        jobApp.pageNum = 1;
-        prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-    });
+// Helper method to reset user parameters to default
+jobApp.resetQuery = function(){
+    jobApp.jobTitle = '';
+    jobApp.company = '';
+    jobApp.location = '';
+    jobApp.pageNum = 1;
+    jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+    jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+    jobApp.maxPages = 1;
+    jobApp.sortBtn.value = 'relevance';  
+    jobApp.sortByParameter = 'relevance';    
 }
 
 /* =========================
  * getJobs method
- * - This method requests info from the API based on user parameters passed to it by getUserQuery() method
- * - It retrieves the following information on each job: jobTitle, company, location and redirect URL
+ * - This method requests info from the API based on latest user parameters submitted
  * - If the API call is successful, execute displayJobs() and pass on json results data
- * - If the API call fails, display an error message
+ * - If the API call fails, display an error message and reset all fields to default
  * ======================== */
 
-jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
+jobApp.getJobs = async () => {
     
     const url = new URL (`https://api.adzuna.com/v1/api/jobs/ca/search/${jobApp.pageNum}`)
 
     let data = {
         app_id: jobApp.id,
         app_key: jobApp.key,
-        sort_by: sortByParameter,
+        sort_by: jobApp.sortByParameter,
         results_per_page: 10
     }
 
-    if (jobTitle){
-        data.what = jobTitle;
+    if (jobApp.jobTitle.value){
+        data.what = jobApp.jobTitle.value;
     }
-    if (location) {
-        data.where = location;
+    if (jobApp.location.value) {
+        data.where = jobApp.location.value;
     }
-    if (company) {
-        data.company = company;
+    if (jobApp.company.value) {
+        data.company = jobApp.company.value;
     }
 
     url.search = new URLSearchParams(data);
@@ -151,6 +121,45 @@ jobApp.getJobs = async (jobTitle, company, location, sortByParameter) => {
 };   
 
 /* =========================
+ * checkPageChange method
+ * - This method checks if the user wants to change the page of results displayed after the submit
+ * - If they want a different page, call the API again to retrieve results for that page
+ * ======================== */   
+
+jobApp.checkPageChange = function () {
+    jobApp.prevButton.addEventListener('click', function (e) {
+        if (jobApp.pageNum > 1) {
+            jobApp.pageNum--;
+            jobApp.getJobs();
+        }
+    });
+
+    jobApp.nextButton.addEventListener('click', function (e) {
+        if (jobApp.pageNum < jobApp.maxPages) {
+            jobApp.pageNum++;
+            jobApp.getJobs();       
+        }
+    });
+}
+
+/* =========================
+ * checkSort method
+ * - This method checks if the user wants to sort results displayed after the submit
+ * - If they want to sort by date instead of relevance (default), call API again with desired sorting parameter
+ * ======================== */
+
+jobApp.checkSort = function() {
+    jobApp.sortBtn.addEventListener('change', function (e) {
+        jobApp.sortByParameter = this.value;
+        jobApp.getJobs();
+
+        // reset page to first page if sorting is changed to show first page of results sorted
+        jobApp.pageNum = 1;
+        jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
+    });
+}
+
+/* =========================
  * showErrorMsg method
  * - This method displays a basic user-friendly messages if no jobs match the parameters or the API call fails
  * ======================== */
@@ -160,11 +169,14 @@ jobApp.showErrorMsg = function(){
     document.getElementById('jobsList').innerHTML = '<li>No matching jobs found. Please enter different parameters and try again.</li>';
     document.getElementById('currentPage').textContent = '';
     document.getElementById('jobCount').textContent = '';
+    jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: none';
+    jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: none';
 }
 
 /* =========================
  * displayJobs method
- * - This method displays all the jobs returned by the getJobs() in the jobsList ul by looping through each job result 
+ * - This method displays all the jobs returned by the getJobs() 
+ * - It displays the following information on each job: jobTitle, company, location and redirect URL
  * - It first clears all the old results of previous searches (if applicable)
  * - Then loops through each job result and creates a list item to contain each job result
  * - It finally displays each list item by appending to existing ul 
@@ -175,6 +187,20 @@ jobApp.displayJobs = function(jobs, jobsCount) {
     // set max pages to num pages of results (10 results per page)
     jobApp.maxPages = Math.ceil((jobsCount) / 10);
     document.getElementById('currentPage').textContent = `Page ${jobApp.pageNum} of ${jobApp.maxPages}`;
+
+    // display next button if more than 1 pages and not on the last page 
+    if ( (jobApp.maxPages > 1) && (jobApp.pageNum < jobApp.maxPages) ){
+        jobApp.nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+    } else {
+        jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
+    }
+
+    // display prev button if more than 1 page and currently on page 2+
+    if ( (jobApp.maxPages > 1) && (jobApp.pageNum > 1) ){
+        jobApp.prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
+    } else {
+        jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
+    }
 
     // show total number of results found
     document.getElementById('jobCount').textContent = jobsCount + " total results found.";
@@ -206,7 +232,7 @@ jobApp.displayJobs = function(jobs, jobsCount) {
         const redirectUrl = document.createElement('p');
         const redirectLink = document.createElement('a');
         redirectLink.setAttribute("href",job.redirect_url);
-        redirectLink.textContent = 'Apply here';
+        redirectLink.textContent = 'Apply';
         redirectUrl.appendChild(redirectLink);
 
         // append the job details to each job list item

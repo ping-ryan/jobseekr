@@ -138,6 +138,7 @@ input {
         background-color: $accent;
         padding: 0.5rem 2rem;
         border-radius: 30px;
+        transition: 0.3s;
         &:hover {
             background-color: $white;
             color: $black;
@@ -172,7 +173,7 @@ input {
     background-color: $white;
 }
 
-.previousPage {
+.previousPage, .nextPage {
     opacity: 0.3;
     pointer-events: none;
 }
