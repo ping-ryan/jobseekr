@@ -206,7 +206,7 @@ jobApp.displayJobs = function(jobs, jobsCount) {
         const redirectUrl = document.createElement('p');
         const redirectLink = document.createElement('a');
         redirectLink.setAttribute("href",job.redirect_url);
-        redirectLink.textContent = 'Apply here';
+        redirectLink.textContent = 'Apply';
         redirectUrl.appendChild(redirectLink);
 
         // append the job details to each job list item

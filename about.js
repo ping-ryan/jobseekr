@@ -20,14 +20,14 @@ aboutPage.themeToggle = function(){
             document.body.style.cssText = 'background-color: #f6f6f6; color: #2D3047;';
             document.getElementById('lightDarkModeBtn').style.border = '2px solid #2D3047';
             document.getElementById('footer').style.backgroundColor = '#f7e1ce';  
-            document.querySelectorAll('.navLink').forEach(function(link) {
+            document.querySelectorAll('.navLink, i').forEach(function(link) {
                 link.style.color = '#2D3047';
                 link.classList.add('hoverClass');
             });
             document.querySelectorAll('.profileImg').forEach(function(img) {
                 img.style.backgroundColor = '#f7e1ce';
             });
-            document.querySelectorAll("h2, h4, i").forEach(function(content) {
+            document.querySelectorAll('h2, h4').forEach(function(content) {
                 content.style.color = '#2D3047';
             });             
         
@@ -37,16 +37,16 @@ aboutPage.themeToggle = function(){
             document.body.style.cssText = 'background-color: #2D3047; color: #f6f6f6;';
             document.getElementById('lightDarkModeBtn').style.border = '2px solid #f6f6f6';
             document.getElementById('footer').style.backgroundColor = '#f6f6f6';
-            document.querySelectorAll('.navLink').forEach(function(link) {
+            document.querySelectorAll('.navLink, i').forEach(function(link) {
                 link.style.color = '#f6f6f6';
                 link.classList.add('hoverClass');
             });
             document.querySelectorAll('.profileImg').forEach(function(img) {
                 img.style.backgroundColor = '#f6f6f6';
             });
-            document.querySelectorAll("h2, h4, i").forEach(function(content) {
+            document.querySelectorAll('h2, h4').forEach(function(content) {
                 content.style.color = '#f6f6f6';
-            });            
+            });              
         }
     });
 }

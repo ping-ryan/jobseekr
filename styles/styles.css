@@ -669,6 +669,8 @@ input {
   background-color: #FF8552;
   padding: 0.5rem 2rem;
   border-radius: 30px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 .jobsList a:hover {
   background-color: #f6f6f6;
