@@ -131,23 +131,13 @@ jobApp.checkPageChange = function () {
         if (jobApp.pageNum > 1) {
             jobApp.pageNum--;
             jobApp.getJobs();
-            if (jobApp.pageNum === 1) {
-                jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-            } else {
-                jobApp.nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
-            }
         }
     });
 
     jobApp.nextButton.addEventListener('click', function (e) {
         if (jobApp.pageNum < jobApp.maxPages) {
             jobApp.pageNum++;
-            jobApp.getJobs();
-            if (jobApp.pageNum === jobApp.maxPages) {
-                jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: none;';
-            } else {
-                jobApp.prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
-            }           
+            jobApp.getJobs();       
         }
     });
 }
@@ -198,9 +188,14 @@ jobApp.displayJobs = function(jobs, jobsCount) {
     jobApp.maxPages = Math.ceil((jobsCount) / 10);
     document.getElementById('currentPage').textContent = `Page ${jobApp.pageNum} of ${jobApp.maxPages}`;
 
-    // display next button if more than 1 pages
-    if (jobApp.maxPages > 1){
+    // display next button if more than 1 pages and not on the last page 
+    if ( (jobApp.maxPages > 1) && (jobApp.pageNum < jobApp.maxPages) ){
         jobApp.nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+    }
+
+    // display prev button if more than 1 page and currently on page 2+
+    if ( (jobApp.maxPages > 1) && (jobApp.pageNum > 1) ){
+        jobApp.prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
     }
 
     // show total number of results found

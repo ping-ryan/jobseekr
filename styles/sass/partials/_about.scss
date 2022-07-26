@@ -30,10 +30,12 @@
     .textContent {
         flex: 1;
         text-align: center;
+        @media (min-width: 1367px) {
+            text-align: left;
+        }
     }
-    @media  (min-width: 900px) {
-        flex-direction: row;
-        text-align: left;
+    .limitationsText {
+        padding-top: 1rem;
     }
 }
 
@@ -60,6 +62,7 @@
     .teamHeader {
         padding-bottom: 4rem;
         color: $accent;
+        font-size: clamp(2.25rem, 3vw, 2.625rem);
     }
     i {
         font-size: 2rem;
