@@ -192,14 +192,14 @@ jobApp.displayJobs = function(jobs, jobsCount) {
     if ( (jobApp.maxPages > 1) && (jobApp.pageNum < jobApp.maxPages) ){
         jobApp.nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
     } else {
-        jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
+        jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: none';
     }
 
     // display prev button if more than 1 page and currently on page 2+
     if ( (jobApp.maxPages > 1) && (jobApp.pageNum > 1) ){
         jobApp.prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
     } else {
-        jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
+        jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: none';
     }
 
     // show total number of results found
