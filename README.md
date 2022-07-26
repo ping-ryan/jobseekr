@@ -45,7 +45,7 @@ By implementating pagination in our app, the Adzuna API only loads the current p
 
 ### 3. Pair Programming/ Collaboration
 
-By alternating consistently between the driver and navigator role, we were able to reinforce our understanding of core concepts applied in our app. Effective communication allowed us to minimize any code conflicts and to optimize the legibility of our code (e.g., by using meaningful variable names throughout).
+By alternating consistently between the driver and navigator role, we were able to reinforce our understanding of core concepts applied in our app. Effective communication allowed us to minimize any code conflicts and to optimize the legibility of our code (e.g., by using meaningful variable names throughout). Additionally, we also used a Trello board to organize our tasks for this project.
 
 ## Technical Challenges
 
