@@ -191,11 +191,15 @@ jobApp.displayJobs = function(jobs, jobsCount) {
     // display next button if more than 1 pages and not on the last page 
     if ( (jobApp.maxPages > 1) && (jobApp.pageNum < jobApp.maxPages) ){
         jobApp.nextButton.style.cssText = 'opacity: 1; pointer-events: auto';
+    } else {
+        jobApp.nextButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
     }
 
     // display prev button if more than 1 page and currently on page 2+
     if ( (jobApp.maxPages > 1) && (jobApp.pageNum > 1) ){
         jobApp.prevButton.style.cssText = 'opacity: 1; pointer-events: auto';
+    } else {
+        jobApp.prevButton.style.cssText = 'opacity: 0.3; pointer-events: auto';
     }
 
     // show total number of results found
