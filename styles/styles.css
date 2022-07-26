@@ -712,7 +712,7 @@ input {
   background-color: #f6f6f6;
 }
 
-.previousPage {
+.previousPage, .nextPage {
   opacity: 0.3;
   pointer-events: none;
 }

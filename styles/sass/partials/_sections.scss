@@ -173,7 +173,7 @@ input {
     background-color: $white;
 }
 
-.previousPage {
+.previousPage, .nextPage {
     opacity: 0.3;
     pointer-events: none;
 }
